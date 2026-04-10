@@ -49,6 +49,8 @@ export default async function TriviaPage() {
     }),
   ]);
 
+  type TriviaRow = (typeof trivia)[number];
+
   return (
     <div className="p-6 space-y-1">
       <select className="bg-neutral-800 border border-neutral-700 px-3 py-2 rounded-none">
@@ -69,7 +71,7 @@ export default async function TriviaPage() {
         </button>
       </form>
 
-      {trivia.map((item) => (
+      {trivia.map((item: TriviaRow) => (
         <details key={item.item_id}>
           <summary className="cursor-pointer list-none">
             <div className="grid grid-cols-[3fr_1fr_1fr] items-stretch rounded-2xl overflow-hidden bg-neutral-900">
