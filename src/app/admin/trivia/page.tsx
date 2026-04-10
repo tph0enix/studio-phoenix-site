@@ -53,7 +53,7 @@ export default async function TriviaPage() {
     <div className="p-6 space-y-1">
       <select className="bg-neutral-800 border border-neutral-700 px-3 py-2 rounded-none">
         <option value="">All</option>
-        {topicLevel1Options.map((option) => (
+        {topicLevel1Options.map((option: { topic_level_1: string | null }) => (
           <option
             key={option.topic_level_1 ?? "null"}
             value={option.topic_level_1 ?? ""}
