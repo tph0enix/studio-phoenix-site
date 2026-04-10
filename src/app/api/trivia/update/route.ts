@@ -17,15 +17,16 @@ export async function POST(req: Request) {
                 topic_level_1: body.topic_level_1,
                 topic_level_2: body.topic_level_2,
 
-                is_checked_fact: body.is_checked_fact,
+                is_checked_fact: body.answer_links_url !== null,
                 is_checked_voice: body.is_checked_voice,
                 is_checked_hook: body.is_checked_hook,
                 is_checked_interest: body.is_checked_interest,
                 is_checked_conciseness: body.is_checked_conciseness,
-                is_posted_question: body.is_posted_question,
-                is_posted_answer: body.is_posted_answer,
-                is_staged_question: body.is_staged_question,
-                is_staged_answer: body.is_staged_answer,
+
+                is_posted_question: (toDateOrNull(body.datetime_posted_question) !== null) && (body.question_post_link_urlstub !== null),
+                is_posted_answer: (toDateOrNull(body.datetime_posted_answer) !== null) && (body.answer_post_link_urlstub !== null),
+                is_staged_question: toDateOrNull(body.datetime_scheduled_question) !== null,
+                is_staged_answer: toDateOrNull(body.datetime_scheduled_answer) !== null,
 
                 datetime_scheduled_question: toDateOrNull(body.datetime_scheduled_question),
                 datetime_scheduled_answer: toDateOrNull(body.datetime_scheduled_answer),

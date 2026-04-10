@@ -25,15 +25,15 @@ export default function TriviaEditor({ item }: TriviaItem) {
     const [itemTopicLevel1, setItemTopicLevel1] = useState(item.topic_level_1 ?? "");
     const [itemTopicLevel2, setItemTopicLevel2] = useState(item.topic_level_2 ?? "");
 
-    const [itemIsCheckedFact, setItemIsCheckedFact] = useState(item.is_checked_fact ?? false);
+    //const [itemIsCheckedFact, setItemIsCheckedFact] = useState(item.is_checked_fact ?? false);
     const [itemIsCheckedVoice, setItemIsCheckedVoice] = useState(item.is_checked_voice ?? false);
     const [itemIsCheckedHook, setItemIsCheckedHook] = useState(item.is_checked_hook ?? false);
     const [itemIsCheckedInterest, setItemIsCheckedInterest] = useState(item.is_checked_interest ?? false);
     const [itemIsCheckedConciseness, setItemIsCheckedConciseness] = useState(item.is_checked_conciseness ?? false);
-    const [itemIsPostedQuestion, setItemIsPostedQuestion] = useState(item.is_posted_question ?? false);
-    const [itemIsPostedAnswer, setItemIsPostedAnswer] = useState(item.is_posted_answer ?? false);
-    const [itemIsStagedQuestion, setItemIsStagedQuestion] = useState(item.is_staged_question ?? false);
-    const [itemIsStagedAnswer, setItemIsStagedAnswer] = useState(item.is_staged_answer ?? false);
+    //const [itemIsPostedQuestion, setItemIsPostedQuestion] = useState(item.is_posted_question ?? false);
+    //const [itemIsPostedAnswer, setItemIsPostedAnswer] = useState(item.is_posted_answer ?? false);
+    //const [itemIsStagedQuestion, setItemIsStagedQuestion] = useState(item.is_staged_question ?? false);
+    //const [itemIsStagedAnswer, setItemIsStagedAnswer] = useState(item.is_staged_answer ?? false);
 
     const [itemDTScheduledQuestion, setItemDTScheduledQuestion] = useState(formatForDateTimeLocal(item.datetime_scheduled_question));
     const [itemDTScheduledAnswer, setItemDTScheduledAnswer] = useState(formatForDateTimeLocal(item.datetime_scheduled_answer));
@@ -68,15 +68,15 @@ export default function TriviaEditor({ item }: TriviaItem) {
                 topic_level_1: itemTopicLevel1,
                 topic_level_2: itemTopicLevel2,
 
-                is_checked_fact: itemIsCheckedFact,
+                //is_checked_fact: itemIsCheckedFact,
                 is_checked_voice: itemIsCheckedVoice,
                 is_checked_hook: itemIsCheckedHook,
                 is_checked_interest: itemIsCheckedInterest,
                 is_checked_conciseness: itemIsCheckedConciseness,
-                is_posted_question: itemIsPostedQuestion,
-                is_posted_answer: itemIsPostedAnswer,
-                is_staged_question: itemIsStagedQuestion,
-                is_staged_answer: itemIsStagedAnswer,
+                //is_posted_question: itemIsPostedQuestion,
+                //is_posted_answer: itemIsPostedAnswer,
+                //is_staged_question: itemIsStagedQuestion,
+                //is_staged_answer: itemIsStagedAnswer,
 
                 datetime_scheduled_question: itemDTScheduledQuestion,
                 datetime_scheduled_answer: itemDTScheduledAnswer,
@@ -138,17 +138,7 @@ export default function TriviaEditor({ item }: TriviaItem) {
                 </div>
             </div>
 
-            <div className="grid grid-cols-5 gap-2">
-                <label className="flex items-center gap-2 text-sm">
-                    <input
-                        type="checkbox"
-                        checked={itemIsCheckedFact}
-                        onChange={(e) => setItemIsCheckedFact(e.target.checked)}
-                        className="h-4 w-4"
-                    />
-                    Fact Checked?
-                </label>
-                
+            <div className="grid grid-cols-4 gap-2">
                 <label className="flex items-center gap-2 text-sm">
                     <input
                         type="checkbox"
@@ -220,16 +210,6 @@ export default function TriviaEditor({ item }: TriviaItem) {
                             onChange={(e) => setItemDTScheduledQuestion(e.target.value)}
                             className="w-full bg-neutral-800 border border-neutral-700 px-3 py-2 rounded-md"
                         />
-                        
-                        <label className="flex items-center gap-2 text-sm">
-                            <input
-                                type="checkbox"
-                                checked={itemIsStagedQuestion}
-                                onChange={(e) => setItemIsStagedQuestion(e.target.checked)}
-                                className="h-4 w-4"
-                            />
-                            Question Staged?
-                        </label>
                     </div>
 
                     <div className="space-y-2">
@@ -240,16 +220,6 @@ export default function TriviaEditor({ item }: TriviaItem) {
                             onChange={(e) => setItemDTPostedQuestion(e.target.value)}
                             className="w-full bg-neutral-800 border border-neutral-700 px-3 py-2 rounded-md"
                         />
-
-                        <label className="flex items-center gap-2 text-sm">
-                            <input
-                                type="checkbox"
-                                checked={itemIsPostedQuestion}
-                                onChange={(e) => setItemIsPostedQuestion(e.target.checked)}
-                                className="h-4 w-4"
-                            />
-                            Question Posted?
-                        </label>
                     </div>
 
                     <label className="text-sm">Question Image URL</label>
@@ -304,16 +274,6 @@ export default function TriviaEditor({ item }: TriviaItem) {
                             onChange={(e) => setItemDTScheduledAnswer(e.target.value)}
                             className="w-full bg-neutral-800 border border-neutral-700 px-3 py-2 rounded-md"
                         />
-                        
-                        <label className="flex items-center gap-2 text-sm">
-                            <input
-                                type="checkbox"
-                                checked={itemIsStagedAnswer}
-                                onChange={(e) => setItemIsStagedAnswer(e.target.checked)}
-                                className="h-4 w-4"
-                            />
-                            Answer Staged?
-                        </label>
                     </div>
 
                     <div className="space-y-2">
@@ -324,16 +284,6 @@ export default function TriviaEditor({ item }: TriviaItem) {
                             onChange={(e) => setItemDTPostedAnswer(e.target.value)}
                             className="w-full bg-neutral-800 border border-neutral-700 px-3 py-2 rounded-md"
                         />
-
-                        <label className="flex items-center gap-2 text-sm">
-                            <input
-                                type="checkbox"
-                                checked={itemIsPostedAnswer}
-                                onChange={(e) => setItemIsPostedAnswer(e.target.checked)}
-                                className="h-4 w-4"
-                            />
-                            Answer Posted?
-                        </label>
                     </div>
 
                     <label className="text-sm">Answer Source URL</label>
