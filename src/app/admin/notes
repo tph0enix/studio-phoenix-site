@@ -1,0 +1,3 @@
+To get Prisma to read Neon's database and build models automatically:
+- in project root, run: npx prisma db pull
+- then: npx prisma generate

@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model trivia {
+  item_id                     Int       @id @default(autoincrement())
+  item_name                   String?
+  topic_level_1               String?
+  topic_level_2               String?
+  is_checked_fact             Boolean?  @default(false)
+  is_checked_voice            Boolean?  @default(false)
+  is_checked_hook             Boolean?  @default(false)
+  is_checked_interest         Boolean?  @default(false)
+  is_checked_conciseness      Boolean?  @default(false)
+  is_posted_question          Boolean?  @default(false)
+  is_posted_answer            Boolean?  @default(false)
+  is_staged_question          Boolean?  @default(false)
+  is_staged_answer            Boolean?  @default(false)
+  datetime_scheduled_question DateTime? @db.Timestamptz(6)
+  datetime_scheduled_answer   DateTime? @db.Timestamptz(6)
+  datetime_posted_question    DateTime? @db.Timestamptz(6)
+  datetime_posted_answer      DateTime? @db.Timestamptz(6)
+  question_opener             String?
+  question_raw                String?
+  question_images_url         String?
+  question_source_links_url   String?
+  question_post_link_urlstub  String?
+  answer_raw                  String?
+  answer_notes                String?
+  answer_links_url            String?
+  answer_post_link_urlstub    String?
+}
