@@ -2,21 +2,27 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(req: NextRequest) {
-  const url = req.nextUrl
   const hostname = req.headers.get('host') || ''
+  const { pathname } = req.nextUrl
 
-  // 1. More permissive check: Does the host contain "vector"?
+  // 1. Log for debugging (Check Vercel Runtime Logs)
+  console.log(`[Middleware Check] Host: ${hostname} | Path: ${pathname}`)
+
+  // 2. Use a case-insensitive, partial check for the subdomain
   const isVectorSubdomain = hostname.toLowerCase().startsWith('vector.')
 
   if (isVectorSubdomain) {
-    // 2. Prevent the middleware from rewriting if we're already "inside" the folder
-    if (url.pathname.startsWith('/vector')) {
+    // 3. If the user manually typed /vector, don't rewrite it again
+    if (pathname.startsWith('/vector')) {
       return NextResponse.next()
     }
 
-    // 3. The Internal Rewrite
-    // This tells Vercel: "The user stays at vector.studiophoenix.ink/ but show them /vector"
-    return NextResponse.rewrite(new URL(`/vector${url.pathname}`, req.url))
+    // 4. Clean Rewrite
+    // We clone the URL to ensure all search params (?query=...) stay intact
+    const url = req.nextUrl.clone()
+    url.pathname = `/vector${pathname}`
+    
+    return NextResponse.rewrite(url)
   }
 
   return NextResponse.next()
