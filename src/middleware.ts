@@ -31,12 +31,11 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
+     * Match all request paths except for:
+     * 1. /api (API routes)
+     * 2. /_next (Next.js internals like static files and images)
+     * 3. All files with extensions (e.g., .svg, .png, .jpg, .ico, .css, .js)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next|[^?]*\\.(?:html|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
   ],
 }
