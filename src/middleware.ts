@@ -1,32 +1,24 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export function middleware(req: NextRequest) {
-  const hostname = req.headers.get('host')
-  const { pathname } = req.nextUrl
+export function middleware(request: NextRequest) {
+  // This will log to the Vercel "Logs" tab (Runtime logs)
+  console.log('--- GATEKEEPER IGNITED ---');
+  console.log('Host:', request.headers.get('host'));
+  console.log('Path:', request.nextUrl.pathname);
 
-  // 1. Target the subdomain
-  if (hostname === 'vector.studiophoenix.ink') {
-    // 2. Prevent infinite loops if the path already starts with /vector
-    if (pathname.startsWith('/vector')) {
-      return NextResponse.next()
+  const hostname = request.headers.get('host') || '';
+  
+  if (hostname.includes('vector')) {
+    if (!request.nextUrl.pathname.startsWith('/vector')) {
+      return NextResponse.rewrite(new URL(`/vector${request.nextUrl.pathname}`, request.url));
     }
-
-    // 3. The "Cloak": Internally rewrite / to /vector
-    // The user sees vector.studiophoenix.ink/ but the server serves /vector/
-    return NextResponse.rewrite(new URL(`/vector${pathname}`, req.url))
   }
+
+  return NextResponse.next();
 }
 
+// Ensure this matches EVERYTHING for the test
 export const config = {
-  matcher: [
-    /*
-     * Match all paths except:
-     * 1. /api routes
-     * 2. /_next (Next.js internals)
-     * 3. /_static (inside /public)
-     * 4. Static files (favicon, images, etc.)
-     */
-    '/((?!api|_next|_static|_vercel|[\\w-]+\\.\\w+).*)',
-  ],
-}
+  matcher: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+};
