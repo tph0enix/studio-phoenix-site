@@ -1,5 +1,8 @@
 import Image from "next/image";
-import HeroSection from "@/components/home/SectionHero";
+import SectionHero from "@/components/home/SectionHero";
+import SectionIntro from '@/components/home/SectionIntro';
+import SectionAreas from '@/components/home/SectionAreas';
+import SectionFooter from '@/components/home/SectionFooter';
 
 export default function HomePage() {
   return (
@@ -21,7 +24,10 @@ export default function HomePage() {
 
       {/* Content layer */}
       <div className="relative z-10">
-        <HeroSection />
+        <SectionHero />
+        <SectionIntro />
+        <SectionAreas />
+        <SectionFooter />
         <div className="h-[4000px]" />
       </div>
       

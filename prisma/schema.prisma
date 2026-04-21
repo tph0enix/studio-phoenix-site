@@ -34,3 +34,12 @@ model trivia {
   answer_links_url            String?
   answer_post_link_urlstub    String?
 }
+
+model email_submissions {
+  id           Int     @id @default(autoincrement())
+  email_local  String?
+  email_domain String?
+  date_submit  String?
+
+  @@unique([email_local, email_domain]) // Prevents DB-level duplicates
+}

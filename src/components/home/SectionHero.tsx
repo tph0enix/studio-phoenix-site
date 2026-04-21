@@ -4,15 +4,6 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { geistSans, inter, smashHit } from "../../app/fonts";
 
-const realBornWords = [
-    "Intelligence",
-    "Storytelling",
-    "Learning",
-    "Beauty",
-    "Curiosity",
-    "Meaning",
-];
-
 //from mismanaged data comes real intelligence
 //from cliche entertainment comes true storytelling
 //from dry facts comes passionate learning
@@ -20,7 +11,7 @@ const realBornWords = [
 //from placeholders come purpose
 //from the shallow comes sincerity
 
-//three standards:
+//four standards:
 //- larger than life
 //- straight to the point
 //- beautiful & catchy
@@ -62,25 +53,49 @@ export default function SectionHero() {
 
                             <div className={`${inter.className} mb-25 w-full text-white text-center`}>
                                     <h1 className="tracking-[0.1em]">
-                                        <span className="md:text-5xl font-extrabold">Truth refined. Meaning reborn.</span><br />
-                                        <span className="block md:text-2xl font-extralight mt-2 tracking-normal">From the ashes of the digital facade, rises the fire of the real.</span>
+                                        <span className="md:text-5xl font-extrabold">Meaning reborn. Truth refined.</span><br />
+                                        <span className="block md:text-2xl font-extralight mt-2 tracking-normal">From the ashes of the Digital Facade, rises the fire of the real.</span>
                                     </h1>
-                                    <p className="font-medium mt-10 md:text-base tracking-[0.2em]">(And we brought cookies!)</p>
+                                    <p className="font-medium mt-10 md:text-base tracking-[0.2em]">(Always made by 100% free-range organic humans!)</p>
                             </div>
 
                             <form className="flex w-full max-w-xl flex-col gap-3 sm:flex-row">
                                 <input
                                     type="email"
-                                    placeholder="Enter your email"
+                                    placeholder=""
                                     className="h-12 flex-1 rounded-full border border-white/20 bg-white/10 px-5 text-white placeholder:text-white/45 outline-none backdrop-blur-sm transition focus:border-white/45"
                                 />
                                 <button
                                     type="submit"
-                                    className="h-12 rounded-full bg-white px-6 font-medium text-black transition hover:scale-[1.01] hover:bg-white/90"
+                                    className="
+                                        bg-[#13A940] 
+                                        font-medium 
+                                        text-white 
+                                        px-8
+                                        transition all:duration-300 ease-out
+                                        
+                                        hover:shadow-[0_0_50px_5px_rgba(19, 169, 64, 0.6)]
+                                        hover:brightness-110
+                                    "
+
+                                    style={{
+                                        // Inline style for the guaranteed glow
+                                        filter: 'drop-shadow(0px 0px 0px rgba(19, 169, 64, 0))',
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.filter = 'drop-shadow(0px 0px 15px rgba(19, 169, 64, 0.8))';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.filter = 'drop-shadow(0px 0px 0px rgba(19, 169, 64, 0))';
+                                    }}
                                 >
-                                    Stay in orbit
+                                    Let's go!
                                 </button>
                             </form>
+
+                            <div>
+                                <p>* And we NEVER sell your data. Your email is safe with us.</p>
+                            </div>
                         </div>
                 </div>
             </div>

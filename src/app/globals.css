@@ -10,17 +10,20 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* --- VECTOR ADDITIONS START --- */
+  
+  /* Mapping Fonts from fonts.ts */
+  --font-inter: var(--font-inter);
+  --font-smash: var(--font-smashhit);
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Mapping Brand Colors from your table */
+  --color-phoenix-orange: #F29801;
+  --color-blue-flame: #1935C2;
+  --color-grounded-green: #13A940;
+  --color-ash-gray: #8A8986;
+  --color-deep-black: #20201F;
+  --color-bright-white: #F3F1EC;
+
+  /* --- VECTOR ADDITIONS END --- */
 }
