@@ -5,6 +5,7 @@ import VectorServices from '@/components/vector/VectorServices';
 import VectorContact from '@/components/vector/VectorContact';
 import VectorFooter from '@/components/vector/VectorFooter';
 import VectorEmailForm from '@/components/vector/VectorEmailForm';
+import VectorAbout from '@/components/vector/VectorAbout';
 
 export default function VectorLandingPage() {
   return (
@@ -14,7 +15,8 @@ export default function VectorLandingPage() {
       <VectorEmailForm />
       <VectorProof />
       <VectorServices />
-      <VectorContact />
+      <VectorEmailForm />
+      <VectorAbout />
       <VectorFooter />
     </main>
   );

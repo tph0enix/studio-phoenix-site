@@ -2,8 +2,11 @@ import React from 'react';
 
 const VectorFooter = () => {
   return (
-    <footer className="bg-deep-black border-t border-ash-gray/10 py-12 px-6 font-sans">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+    <footer className="bg-deep-black border-t border-ash-gray/10 px-6 font-sans">
+        <p className="px-6 py-1 text-xs md:text-xs font-inter font-light text-ash-gray tracking-tight mb-4 text-right italic">
+            * based on our performance averages & work availability. Not every case is typical. Inquire for further details.
+        </p>
+      <div className="py-10 max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
         
         {/* Left: Identity + Pedigree */}
         <div className="flex items-center gap-4">
@@ -34,7 +37,7 @@ const VectorFooter = () => {
         {/* Right: Legal + Location */}
         <div className="text-right flex flex-col gap-1">
           <p className="text-[10px] text-ash-gray font-medium tracking-widest uppercase">
-            &copy; 2026 Studio Phoenix LLC. All Rights Reserved.
+            &copy; 2026 Studio Phoenix. All Rights Reserved.
           </p>
           <p className="text-[9px] text-ash-gray/50 uppercase tracking-widest">
             Duluth, GA • Remote Systems Architecture

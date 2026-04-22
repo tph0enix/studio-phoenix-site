@@ -22,7 +22,7 @@ const VectorHero = () => {
             <br />
         </p>
         
-        <h2 className="text-lg font-inter font-bold text-phoenix-orange uppercase tracking-tight mb-4">Re-ignite your data's potential. Get your time back.</h2>
+        <h2 className="text-lg font-inter font-bold text-phoenix-orange uppercase tracking-tight mb-4">Get your time back & re-ignite your data's potential.</h2>
       </div>
 
     </section>
