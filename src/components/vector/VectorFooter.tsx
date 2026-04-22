@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+import { PhoenixLogo } from '../../components/PhoenixLogo';
 
 const VectorFooter = () => {
   return (
@@ -10,11 +12,13 @@ const VectorFooter = () => {
         
         {/* Left: Identity + Pedigree */}
         <div className="flex items-center gap-4">
-          <img 
-            src="/images/branding/logo_emblem.svg" 
-            alt="Phoenix" 
-            className="h-10 w-auto opacity-80" 
-          />
+            <Link href="/">
+            <PhoenixLogo 
+                src="/images/branding/logo_emblem.svg" 
+                className="h-10 w-10"
+            />
+            </Link>
+
           <div className="flex flex-col">
             <span className="text-blue-flame font-mono text-[10px] font-black tracking-widest uppercase">
               [VECTOR]

@@ -170,6 +170,7 @@
     <g
        id="g9685"
        inkscape:label="symbol (base with outline)"
+	   className="phoenix-mark"
        transform="translate(0,-0.2992616)"
        style="display:inline;fill:none;stroke:#20201f;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal">
       <g
@@ -288,8 +289,10 @@
     <g
        id="g3432"
        inkscape:label="symbol (base)"
+	   className="phoenix-mark"
        transform="translate(0,-0.2992616)"
-       style="display:inline;stroke:none;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal">
+       style="display:inline;stroke:none;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal;overflow:visible;"
+	   >
       <g
          transform="translate(-63.680107)"
          id="g64"

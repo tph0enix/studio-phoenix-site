@@ -121,6 +121,7 @@
     <!-- tail -->
     <g
        id="g9685"
+	   className="phoenix-mark"
        inkscape:label="symbol (base with outline)"
        transform="translate(0,-0.2992616)"
        style="display:inline;fill:none;stroke:#20201f;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal">
@@ -239,6 +240,7 @@
     </g>
     <g
        id="g3432"
+	   className="phoenix-mark"
        inkscape:label="symbol (base)"
        transform="translate(0,-0.2992616)"
        style="display:inline;stroke:none;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal">

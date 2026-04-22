@@ -1,18 +1,20 @@
-import React from 'react';
-import Image from "next/image";
+'use client';
+
 import { geistSans, inter, smashHit } from "../../app/fonts";
+import Link from 'next/link';
+import { PhoenixLogo } from '../../components/PhoenixLogo';
 
 const VectorNavbar = () => {
   return (
     <nav className="border-b border-blue-flame p-6 pb-2 flex justify-between items-center bg-black sticky top-0 z-50">
       <div className="flex items-center gap-4">
-        <Image
-            src="/images/branding/logo_full_english.svg"
-            alt="Studio Phoenix logo"
-            width={100}
-            height={20}
+
+        <Link href="/">
+          <PhoenixLogo 
+            src="/images/branding/logo_full_english.svg" 
             className="h-auto w-32 md:w-75"
-        />
+          />
+        </Link>
 
         <span className={`${geistSans.className} text-bright-white font-mono text-[10px] tracking-[0.5em] border-l border-blue-flame pl-4 uppercase`}>
           A world real-born
