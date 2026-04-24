@@ -56,11 +56,17 @@ const VectorEmailForm = () => {
             <button
                 type="submit"
                 disabled={!isMounted || !isValidEmail || !token}
-                
-                className="bg-[#13A940] text-black px-5 py-3 font-inter font-black text-sm uppercase tracking-[0.2em] transition-all hover:bg-white active:scale-[0.98] whitespace-nowrap disabled:bg-ash-gray disabled:cursor-not-allowed"
-            >
-                Get Started
-            </button>
+                className={`
+                    /* BASE ENGINE STATE */
+                    font-inter font-black text-sm uppercase tracking-[0.2em] whitespace-nowrap
+                    px-6 py-4 transition-all duration-500 ease-out active:scale-[0.98]
+                    
+                    ${isValidEmail && token && isMounted
+                    ? "bg-[#13A940] text-black cursor-pointer opacity-100 [filter:drop-shadow(0_0_15px_rgba(19,169,64,0.6))] hover:[filter:drop-shadow(0_0_25px_rgba(19,169,64,0.8))] hover:brightness-110"
+                    : "bg-[#13A940]/30 text-black/40 cursor-not-allowed [filter:none] grayscale-[0.3]" 
+                    }
+                `}
+            >Get Started</button>
 
             <input type="hidden" name="cf-turnstile-response" value={token || ''} />
             <div className="flex justify-center md:justify-start">

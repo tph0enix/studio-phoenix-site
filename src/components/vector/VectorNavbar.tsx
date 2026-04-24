@@ -21,10 +21,9 @@ const VectorNavbar = () => {
         </span>
       </div>
       <div className="hidden md:flex gap-8 text-[10px] font-sans font-bold uppercase tracking-[0.2em]">
-        <a href="#proof" className="text-bright-white hover:text-phoenix-orange transition-colors">Automation</a>
-        <a href="#proof" className="text-bright-white hover:text-phoenix-orange transition-colors">Performance & Stability</a>
-        <a href="#proof" className="text-bright-white hover:text-phoenix-orange transition-colors">Governance</a>
-        <a href="#services" className="text-bright-white hover:text-phoenix-orange transition-colors">Training</a>
+        <a href="#proof" className="text-bright-white hover:text-phoenix-orange transition-colors">Does it Work?</a>
+        <a href="#services" className="text-bright-white hover:text-phoenix-orange transition-colors">What We Do</a>
+        <a href="#about" className="text-bright-white hover:text-phoenix-orange transition-colors">About Us</a>
       </div>
     </nav>
   );

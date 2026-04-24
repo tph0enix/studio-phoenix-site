@@ -5,52 +5,63 @@ import { PhoenixLogo } from '../../components/PhoenixLogo';
 const VectorFooter = () => {
   return (
     <footer className="bg-deep-black border-t border-ash-gray/10 px-6 font-sans">
-        <p className="px-6 py-1 text-xs md:text-xs font-inter font-light text-ash-gray tracking-tight mb-4 text-right italic">
-            * based on our performance averages & work availability. Not every case is typical. Inquire for further details.
+      {/* Top Disclaimer: Tightened and Integrated */}
+      <div className="max-w-6xl mx-auto pt-4">
+        <p className="text-[9px] font-inter font-light text-ash-gray tracking-tight text-right italic">
+          * based on our performance averages & work availability. Not every case is typical. Inquire for further details.
         </p>
-      <div className="py-10 max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-        
-        {/* Left: Identity + Pedigree */}
-        <div className="flex items-center gap-4">
-            <Link href="/">
-            <PhoenixLogo 
-                src="/images/branding/logo_emblem.svg" 
-                className="h-10 w-10"
-            />
-            </Link>
+      </div>
 
-          <div className="flex flex-col">
-            <span className="text-blue-flame font-mono text-[10px] font-black tracking-widest uppercase">
-              [VECTOR]
-            </span>
-            <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-ash-gray font-bold">
-              MS in Mathematics • Purdue University
+      <div className="py-12 max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-end md:items-center gap-10">
+        
+        {/* Left: Identity + Primary Metadata */}
+        <div className="flex items-center gap-5">
+          <Link href="/" className="transition-transform hover:scale-105 active:scale-95">
+            <PhoenixLogo 
+              src="/images/branding/logo_emblem.svg" 
+              className="h-12 w-12"
+            />
+          </Link>
+
+          <div className="flex flex-col border-l border-white/5 pl-5">
+            <div className="flex items-center gap-3">
+              <span className="text-blue-flame font-mono text-xs font-black tracking-[0.3em] uppercase">
+                [VECTOR]
+              </span>
+              <span className="text-[10px] text-ash-gray font-medium tracking-widest uppercase opacity-60">
+                &copy; 2026 Studio Phoenix
+              </span>
+            </div>
+            <p className="text-[9px] text-ash-gray/40 uppercase tracking-[0.25em] mt-1 font-bold">
+              Duluth, GA • Remote Systems Architecture
             </p>
           </div>
         </div>
 
-        {/* Center: Core Competencies */}
-        <div className="flex gap-6 text-[10px] uppercase tracking-[0.3em] font-black text-blue-flame">
-          <span>Architecture</span>
-          <span className="text-ash-gray/30">•</span>
-          <span>Automation</span>
-          <span className="text-ash-gray/30">•</span>
-          <span>Governance</span>
-        </div>
-
-        {/* Right: Legal + Location */}
-        <div className="text-right flex flex-col gap-1">
-          <p className="text-[10px] text-ash-gray font-medium tracking-widest uppercase">
-            &copy; 2026 Studio Phoenix. All Rights Reserved.
-          </p>
-          <p className="text-[9px] text-ash-gray/50 uppercase tracking-widest">
-            Duluth, GA • Remote Systems Architecture
-          </p>
+        {/* Right: Legal, SEO & System Navigation */}
+        <div className="flex flex-wrap justify-end gap-x-8 gap-y-3">
+          <Link href="/legal/privacy" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
+            Privacy Policy
+          </Link>
+          <Link href="legal/terms" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
+            Terms of Service
+          </Link>
+          <Link href="sitemap.ts" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
+            Sitemap
+          </Link>
+          <Link href="legal/cookies" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
+            Cookie Settings
+          </Link>
         </div>
       </div>
 
-      {/* Brutalist Partition Line */}
-      <div className="max-w-6xl mx-auto mt-12 h-px bg-gradient-to-r from-transparent via-ash-gray/20 to-transparent" />
+      {/* Brutalist Partition Line - Bottom */}
+      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-blue-flame/20 to-transparent" />
+      
+      {/* Hidden SEO Keywords for Crawler Optimization (Not visible to users) */}
+      <div className="sr-only">
+        Data Engineering, Business Process Automation, Database Infrastructure Design, Studio Phoenix, Governance, Report Performance, Dataflow, ETL Process, Reporting Training.
+      </div>
     </footer>
   );
 };

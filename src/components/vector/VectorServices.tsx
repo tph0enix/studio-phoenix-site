@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, Map, Hammer, ShieldCheck } from 'lucide-react';
+import { GraduationCap, Bot, Landmark, Gauge } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 const VectorServices = () => {
@@ -25,27 +25,19 @@ const VectorServices = () => {
 
     const processSteps = [
         {
-            title: 'Audit',
-            icon: <Search className="w-8 h-8 text-phoenix-orange" />, // Simple & fast
-            phrase: 'Under the Hood.',
+            title: '1 - Audit',
             desc: 'We dig into your current structure & processes to find exactly where the friction can be improved.'
         },
         {
-            title: 'Roadmap',
-            icon: <Map className="w-8 h-8 text-phoenix-orange" />, // The Vector
-            phrase: 'On the Flight Path.',
+            title: '2 - Roadmap',
             desc: 'We map the practical, necessary changes to meet both your immediate & long-term needs.'
         },
         {
-            title: 'Implementation',
-            icon: <Hammer className="w-8 h-8 text-phoenix-orange" />, // Reignition
-            phrase: 'Through the Reignition.',
+            title: '3 - Implementation',
             desc: 'We build the pipelines & models from blueprint to reality--all while keeping you in the loop.'
         },
         {
-            title: 'Maintenance',
-            icon: <ShieldCheck className="w-8 h-8 text-phoenix-orange" />, // Stewardship
-            phrase: 'Into the Future.',
+            title: '4 - Maintenance',
             desc: 'We protect your new setup by training your people to use the tools & processes.'
         }
     ];
@@ -53,41 +45,39 @@ const VectorServices = () => {
     const coreComponents = [
         { 
             name: 'Automation', 
+            icon: <Bot className="w-8 h-8 text-phoenix-orange" />,
             detail: 'Manual effort is a bug, not a feature. We engineer it out, so humans can do human things again.' 
         },
         { 
             name: 'Performance & Stability', 
+            icon: <Gauge className="w-8 h-8 text-phoenix-orange" />,
             detail: 'Data loads & code changes shouldn\'t cost your evening. We get your time back.'
         },
         { 
             name: 'Governance', 
+            icon: <Landmark className="w-8 h-8 text-phoenix-orange" />,
             detail: 'No more data silos or "shadow IT". We support one clear version of the truth, told the right way.'
         },
         { 
             name: 'Training', 
+            icon: <GraduationCap className="w-8 h-8 text-phoenix-orange" />,
             detail: 'We duplicate our expertise into your team so the standards hold.'
         }
     ];
 
     const bracketBlink = `
         @keyframes bracket-spark {
-            /* Starts dead */
-            0% { opacity: 0; }
-
-            /* First quick flicker */
-            10% { opacity: 1; }
-            15% { opacity: 0; }
 
             /* Second longer hold */
-            16% { opacity: 1; }
-            21% { opacity: 0; }
+            0% { opacity: 1; }
+            74% { opacity: 0; }
 
             /* Final struggle */
-            25% { opacity: 1; }
-            30% { opacity: 0; }
+            75% { opacity: 1; }
+            89% { opacity: 0; }
 
             /* Locks into solid state */
-            80% { opacity: 1; }
+            90% { opacity: 1; }
             100% { opacity: 1; }
         }
         .group:hover .animate-spark {
@@ -96,11 +86,11 @@ const VectorServices = () => {
     `;
 
   return (
-    <section id="services" className="max-w-7xl mx-auto px-6 py-30">
+    <section id="services" className="max-w-7xl mx-auto px-6 py-10">
         <style>{bracketBlink}</style>
       
         {/* Narrative Header */}
-        <div className="mb-12">
+        <div className="mb-12 pt-20">
             <h2 className="text-5xl md:text-7xl font-inter font-black uppercase tracking-tighter text-bright-white leading-none mb-6">
                 Let's <span 
                     ref={reigniteRef}
@@ -113,13 +103,13 @@ const VectorServices = () => {
                     `}>reignite</span> your engine.
             </h2>
             <p className="max-w-2xl text-ash-gray text-lg font-light leading-relaxed">
-                We aren't your usual consulting firm. We provide the <span className="text-bright-white font-medium"> VECTOR </span> to move you from manual chaos to architectural victory--all in just 4 steps or less.
+                We aren't your usual consulting firm. We provide the <span className="text-bright-white font-medium"> VECTOR </span> to move you from chaos to clarity in four ways.
             </p>
         </div>
 
-      {/* The Process: Narrative Flow */}
+      {/* The Areas */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-        {processSteps.map((step, i) => (
+        {coreComponents.map((area, i) => (
           <div key={i} className="relative pt-3 group cursor-default">
             <div className="flex flex-cols-2 ignition-trigger">
             {/* Icon Container */}
@@ -131,11 +121,11 @@ const VectorServices = () => {
                     group-hover:[filter:drop-shadow(0_0_5px_#F29801)_drop-shadow(0_0_30px_#F29801)_drop-shadow(0_0_30px_#F29801)_drop-shadow(0_0_60px_#F29801)]
                     group-hover:saturate-[2]
                 ">
-                    {step.icon}
+                    {area.icon}
                 </span>
 
                 <h3 className="text-3xl h-10 font-inter font-extrabold uppercase text-bright-white">
-                    {step.phrase}
+                    {area.name}
                 </h3>
             </div>
 
@@ -183,7 +173,7 @@ const VectorServices = () => {
                 </svg>
 
                 <p className="text-ash-gray text-sm leading-relaxed max-w-md pl-3">
-                    {step.desc}
+                    {area.detail}
                 </p>
             </div>
 
@@ -191,31 +181,49 @@ const VectorServices = () => {
         ))}
       </div>
 
-      {/* The 4 Components: The Vector Grid */}
-      <div className="mb-40">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {coreComponents.map((comp, i) => (
-            <div key={i} className="bg-ash-gray/5 p-8 border border-transparent hover:border-phoenix/50 transition-all">
-              <h4 className="text-2xl font-inter font-black uppercase text-bright-white italic mb-2">
-                {comp.name}
-              </h4>
-              <p className="text-xs text-ash-gray font-light leading-snug">
-                {comp.detail}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* The 4 steps */}
+      <div id="process" className="mb-40">
+            <h2 className="text-3xl md:text-3xl font-inter font-black uppercase tracking-tighter text-bright-white leading-none mb-6 mt-24 text-center">Our proven 4-step Vector path</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 border-t-2 border-blue-flame">
+                
+                {processSteps.map((step, i) => (
+                <div 
+                    key={i} 
+                    className="group relative p-6 bg-ash-gray/5 border-l-2 border-transparent hover:border-blue-flame transition-all duration-300 cursor-default"
+                >
+                    <h4 className="text-xl font-inter font-black tracking-tighter mb-2 
+                        text-bright-white   
+                        transition-colors
+                        group-hover: text-phoenix-orange
+                        group-hover:[filter:drop-shadow(0_0_5px_#F29801)_drop-shadow(0_0_30px_#F29801)]
+                        group-hover:saturate-[2]
+                        transition-transform
+                        group-hover:translate-x-1 
+                    ">
+                    {step.title}
+                    </h4>
+                    
+                    <p className="text-[11px] text-ash-gray font-light leading-relaxed tracking-wider group-hover:text-bright-white transition-colors">
+                    {step.desc}
+                    </p>
 
-      {/* The "Patient" CTA */}
+                    {/* Bottom Detail Line */}
+                    <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-blue-flame group-hover:w-full transition-all duration-500" />
+                </div>
+                ))}
+            </div>
+        </div>
+
+      {/* The CTA */}
       <div className="border-t border-ash-gray/20 pt-32 text-center">
         <div className="max-w-2xl mx-auto">
           <h3 className="text-4xl md:text-6xl font-inter font-black uppercase tracking-tighter text-bright-white mb-8">
             Ready to see what <span className="text-phoenix-orange">VECTOR</span> can do for you?
           </h3>
           <p className="text-ash-gray text-base font-light">
-            You’ve made it this far. You aren't looking for a quick fix: you want an architectural shift. <br /><br />And we love working with companies like that. 
-            <br /><br />If that’s you, let’s talk.
+            You want smoother life & operations. We're here to make that real.<br /><br />You're a human--not bottom-line fodder for mediocre consultants.
+            <br /><br />Stop losing time, money, peace, and sleep.
+            <br /><br />Let’s talk.
           </p>
         </div>
       </div>

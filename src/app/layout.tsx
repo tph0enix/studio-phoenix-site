@@ -13,9 +13,43 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Studio Phoenix",
-  description: "A flame of hope in the age of the Digital Facade.",
-};
+  metadataBase: new URL('https://vector.studiophoenix.ink'), // THE ANCHOR
+  title: {
+    default: 'VECTOR | Reality-Born Systems Architecture',
+    template: '%s | VECTOR'
+  },
+  description: 'High-performance data infrastructure, automation, and technical governance by Tristan Phoenix. Restoring authentic beauty & information in the Age of the Digital Facade.',
+  openGraph: {
+    title: 'VECTOR | Systems Architecture',
+    description: 'Data infrastructure that ignites performance. Built by Studio Phoenix.',
+    url: 'https://vector.studiophoenix.ink',
+    siteName: 'VECTOR',
+    images: [
+      {
+        url: '/images/branding/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'VECTOR Systems Architecture',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'VECTOR | Systems Architecture',
+    description: 'Restoring authenticity to data systems.',
+    images: ['/images/branding/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  other: {
+    'ai-training': 'noai',
+    'robots': 'noai, noimageai', // Specifically tells bots not to scrape images for training
+  }
+}
 
 export default function RootLayout({
   children,
