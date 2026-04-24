@@ -40,16 +40,16 @@ const VectorFooter = () => {
 
         {/* Right: Legal, SEO & System Navigation */}
         <div className="flex flex-wrap justify-end gap-x-8 gap-y-3">
-          <Link href="/legal/privacy" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
+          <Link href="/privacy" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
             Privacy Policy
           </Link>
-          <Link href="legal/terms" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
+          <Link href="/terms" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
             Terms of Service
           </Link>
-          <Link href="sitemap.ts" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
+          <Link href="/sitemap.xml" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
             Sitemap
           </Link>
-          <Link href="legal/cookies" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
+          <Link href="/cookies" className="text-[10px] text-ash-gray hover:text-blue-flame transition-colors tracking-widest">
             Cookie Settings
           </Link>
         </div>
