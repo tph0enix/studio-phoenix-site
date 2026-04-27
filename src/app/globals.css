@@ -5,6 +5,13 @@
   --foreground: #171717;
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  height: 2px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(30, 144, 255, 0.2);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

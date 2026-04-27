@@ -33,7 +33,7 @@ const VectorFooter = () => {
               </span>
             </div>
             <p className="text-[9px] text-ash-gray/40 uppercase tracking-[0.25em] mt-1 font-bold">
-              Duluth, GA • Remote Systems Architecture
+              Website designed & hand-coded with love by Studio Phoenix.
             </p>
           </div>
         </div>
