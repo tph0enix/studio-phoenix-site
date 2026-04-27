@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { PhoenixLogo } from '@/components/PhoenixLogo';
 
+export const dynamic = 'force-dynamic';
+
 export default function SuccessPage() {
   const searchParams = useSearchParams();
   const paymentIntentId = searchParams.get('payment_intent');
