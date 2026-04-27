@@ -6,7 +6,7 @@ import SectionFooter from '@/components/home/SectionFooter';
 
 export default function HomePage() {
   return (
-    <main className="relatve bg-black text-white">
+    <main className="relative bg-black text-white">
 
       {/* Background layer */}
       <div className="absolute top-0 left-0 w-full z-0 overflow-hidden">

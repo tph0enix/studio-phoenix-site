@@ -20,6 +20,10 @@ export const metadata: Metadata = {
     template: '%s | VECTOR'
   },
   description: 'High-performance data infrastructure, automation, and technical governance by Tristan Phoenix. Restoring authentic beauty & information in the Age of the Digital Facade.',
+  icons: {
+    icon: '/images/branding/favicon.svg',
+    shortcut: '/images/branding/favicon.svg',
+  },
   openGraph: {
     title: 'VECTOR | Systems Architecture',
     description: 'Data infrastructure that ignites performance. Built by Studio Phoenix.',
