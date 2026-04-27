@@ -94,8 +94,7 @@ const VectorServices = () => {
             <h2 className="text-5xl md:text-7xl font-inter font-black uppercase tracking-tighter text-bright-white leading-none mb-6">
                 Let's <span 
                     ref={reigniteRef}
-                    className={`
-                    text-phoenix-orange transition-all duration-500 ease-in-out
+                    className={`text-phoenix-orange transition-all duration-500 ease-in-out
                     ${isReignited 
                         ? "[filter:drop-shadow(0_0_15px_rgba(242,152,1,0.7))_drop-shadow(0_0_50px_rgba(242,152,1,0.5))] saturate-[2] brightness-125" 
                         : "filter-none saturate-100 brightness-100"
@@ -113,14 +112,7 @@ const VectorServices = () => {
           <div key={i} className="relative pt-3 group cursor-default">
             <div className="flex flex-cols-2 ignition-trigger">
             {/* Icon Container */}
-                <span className="
-                    w-12 h-10 
-                    flex 
-                    text-phoenix-orange
-                    transition-all duration-300 
-                    group-hover:[filter:drop-shadow(0_0_5px_#F29801)_drop-shadow(0_0_30px_#F29801)_drop-shadow(0_0_30px_#F29801)_drop-shadow(0_0_60px_#F29801)]
-                    group-hover:saturate-[2]
-                ">
+                <span className="w-12 h-10 flex text-phoenix-orange transition-all duration-300 group-hover:[filter:drop-shadow(0_0_5px_#F29801)_drop-shadow(0_0_30px_#F29801)_drop-shadow(0_0_30px_#F29801)_drop-shadow(0_0_60px_#F29801)] group-hover:saturate-[2]">
                     {area.icon}
                 </span>
 
@@ -132,10 +124,7 @@ const VectorServices = () => {
             <div className="relative p-4 max-w-md">
                 {/* THE ANIMATED BORDER SVG */}
                 <svg
-                    className="
-                        absolute inset-0 w-full h-full 
-                        pointer-events-none
-                    "
+                    className="absolute inset-0 w-full h-full pointer-events-none"
                     viewBox="0 0 100 100"
                     preserveAspectRatio="none"
                 >
@@ -146,14 +135,7 @@ const VectorServices = () => {
                     stroke="#1935C2"
                     strokeWidth="3"
                     vectorEffect="non-scaling-stroke"
-                    className="
-                        transition-all duration-300 ease-in-out 
-                        /* The path length is approx 100 units in this viewbox */
-                        [stroke-dasharray:1000] [stroke-dashoffset:1000] 
-                        group-hover:duration-900
-                        group-hover:[stroke-dashoffset:0]
-                        animate-spark
-                    "
+                    className="transition-all duration-300 ease-in-out [stroke-dasharray:1000] [stroke-dashoffset:1000] group-hover:duration-900 group-hover:[stroke-dashoffset:0] animate-spark"
                     />
                     {/* BOTTOM-RIGHT BRACKET: Starts 35% up the right side, goes down to corner, then 35% left */}
                     <path
@@ -162,13 +144,7 @@ const VectorServices = () => {
                     stroke="#1935C2"
                     strokeWidth="3"
                     vectorEffect="non-scaling-stroke"
-                    className="
-                        transition-all duration-300 ease-in-out 
-                        [stroke-dasharray:1000] [stroke-dashoffset:1000] 
-                        group-hover:duration-900
-                        group-hover:[stroke-dashoffset:0]
-                        animate-spark
-                    "
+                    className="transition-all duration-300 ease-in-out [stroke-dasharray:1000] [stroke-dashoffset:1000] group-hover:duration-900 group-hover:[stroke-dashoffset:0] animate-spark"
                     />
                 </svg>
 
@@ -191,15 +167,7 @@ const VectorServices = () => {
                     key={i} 
                     className="group relative p-6 bg-ash-gray/5 border-l-2 border-transparent hover:border-blue-flame transition-all duration-300 cursor-default"
                 >
-                    <h4 className="text-xl font-inter font-black tracking-tighter mb-2 
-                        text-bright-white   
-                        transition-colors
-                        group-hover: text-phoenix-orange
-                        group-hover:[filter:drop-shadow(0_0_5px_#F29801)_drop-shadow(0_0_30px_#F29801)]
-                        group-hover:saturate-[2]
-                        transition-transform
-                        group-hover:translate-x-1 
-                    ">
+                    <h4 className="text-xl font-inter font-black tracking-tighter mb-2 text-bright-white transition-colors group-hover: text-phoenix-orange group-hover:[filter:drop-shadow(0_0_5px_#F29801)_drop-shadow(0_0_30px_#F29801)] group-hover:saturate-[2] transition-transform group-hover:translate-x-1">
                     {step.title}
                     </h4>
                     
