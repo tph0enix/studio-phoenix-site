@@ -52,7 +52,7 @@ const HeadlessCheckoutForm = ({ selectedSlot, onBack }: HeadlessCheckoutFormProp
          </div>
       </div>
 
-      {/* [CHANGE] The Stripe iFrame Container */}
+      {/* The Stripe iFrame Container */}
       <div className="bg-white/[0.03] p-4 border border-white/10">
         <PaymentElement options={{ layout: 'tabs' }} />
       </div>
@@ -69,7 +69,7 @@ const HeadlessCheckoutForm = ({ selectedSlot, onBack }: HeadlessCheckoutFormProp
             }
           `}
         >
-          {isPayLoading ? "AUTHORIZING..." : "FINALIZE $50.00 DEPOSIT"}
+          {isPayLoading ? "AUTHORIZING..." : "FINALIZE $250 DEPOSIT"}
         </button>
 
         <button 
@@ -77,7 +77,7 @@ const HeadlessCheckoutForm = ({ selectedSlot, onBack }: HeadlessCheckoutFormProp
           onClick={onBack} 
           className="w-full text-[9px] text-white/40 uppercase tracking-widest hover:text-white transition-colors"
         >
-          [CHANGE_SCHEDULE]
+          [Change schedule]
         </button>
       </div>
 
@@ -88,5 +88,5 @@ const HeadlessCheckoutForm = ({ selectedSlot, onBack }: HeadlessCheckoutFormProp
   );
 };
 
-// [CHANGE] Explicit default export
+// Explicit default export
 export default HeadlessCheckoutForm;
