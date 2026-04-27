@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { PhoenixLogo } from '@/components/PhoenixLogo';
+import { Suspense } from 'react'; // 1. Import Suspense
 
-export const dynamic = 'force-dynamic';
-
-export default function SuccessPage() {
+// 2. Move the UI logic into a separate internal component
+function SuccessPageContent() {
   const searchParams = useSearchParams();
   const paymentIntentId = searchParams.get('payment_intent');
 
@@ -76,5 +76,14 @@ export default function SuccessPage() {
       {/* Background Grid/Detail */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] -z-10"></div>
     </main>
+  );
+}
+
+// 3. The main export just wraps the content in Suspense
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center text-white/30 font-mono text-xs uppercase tracking-widest">Initializing Terminal...</div>}>
+      <SuccessPageContent />
+    </Suspense>
   );
 }
