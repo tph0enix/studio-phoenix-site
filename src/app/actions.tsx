@@ -136,7 +136,6 @@ export async function createPaymentIntent(data: {
       amount: 5000,
       currency: 'usd',
       automatic_payment_methods: { enabled: true },
-      automatic_tax: { enabled: true },
       metadata: {
         customer_email: data.email,
         scheduled_slot: data.slot,
