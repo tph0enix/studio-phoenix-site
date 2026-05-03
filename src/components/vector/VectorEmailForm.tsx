@@ -12,6 +12,7 @@ const VectorEmailForm = () => {
     const [token, setToken] = useState<string | null>(null);
     const [isMounted, setIsMounted] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false); // THE MODAL TRIGGER
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
     // 1. The Logic Lock: Start as 'true' to match the server's expected default
@@ -30,12 +31,15 @@ const VectorEmailForm = () => {
         // Extra safety catch
         if (!isValidEmail) return;
 
+        setIsLoading(true); // ← instant feedback
+
         const result = await subscribeUser(formData);
         
         if (result.success) {
             setIsModalOpen(true);
         } else {
             alert(result.error);
+            setIsLoading(false); // ← only reset on error
         }
     }
 
@@ -58,7 +62,7 @@ const VectorEmailForm = () => {
                 />
                 <button
                     type="submit"
-                    disabled={!isMounted || !isValidEmail || !token}
+                    disabled={!isMounted || !isValidEmail || !token || isLoading }
                     className={`
                         /* BASE ENGINE STATE */
                         font-inter font-black text-sm uppercase tracking-[0.2em] whitespace-nowrap
@@ -69,7 +73,7 @@ const VectorEmailForm = () => {
                         : "bg-[#13A940]/30 text-black/40 cursor-not-allowed [filter:none] grayscale-[0.3]" 
                         }
                     `}
-                >Get Started</button>
+                >{isLoading ? 'Igniting..' : 'Get Started'}</button>
 
                 <input type="hidden" name="cf-turnstile-response" value={token || ''} />
                 <div className="flex justify-center md:justify-start">
