@@ -125,6 +125,7 @@ export async function createPaymentIntent(data: {
 }) {
   // Ensure the key is read at the exact moment of the call
   const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY || '');
+  const payment_amt = 250; // usd
 
   try {
     // 1. Validate the key exists before calling Stripe
@@ -133,7 +134,7 @@ export async function createPaymentIntent(data: {
     }
 
     const paymentIntent = await stripeInstance.paymentIntents.create({
-      amount: 100, //250.00
+      amount: payment_amt * 100,
       currency: 'usd',
       automatic_payment_methods: { enabled: true },
       receipt_email: data.email, // ← this is what sends the customer their receipt
