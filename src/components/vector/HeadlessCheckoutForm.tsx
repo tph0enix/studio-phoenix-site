@@ -12,6 +12,7 @@ const HeadlessCheckoutForm = ({ selectedSlot, onBack }: HeadlessCheckoutFormProp
   const stripe = useStripe();
   const elements = useElements();
   const [isPayLoading, setIsPayLoading] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,18 +70,21 @@ const HeadlessCheckoutForm = ({ selectedSlot, onBack }: HeadlessCheckoutFormProp
 
       {/* The Stripe iFrame Container */}
       <div className="bg-white/[0.03] p-4 border border-white/10">
-        <PaymentElement options={{ layout: 'tabs' }} />
+        <PaymentElement 
+          options={{ layout: 'tabs' }} 
+          onChange={(e) => setIsComplete(e.complete)}
+        />
       </div>
 
       <div className="space-y-4 pt-4">
         <button 
           type="submit"
-          disabled={isPayLoading || !stripe}
+          disabled={isPayLoading || !stripe || !isComplete}
           className={`
             w-full font-inter font-black uppercase text-xs py-5 tracking-[0.4em] transition-all duration-500
-            ${isPayLoading 
-              ? "bg-[#13A940]/30 text-black/40 cursor-wait grayscale-[0.5]" 
-              : "bg-[#13A940] text-black cursor-pointer [filter:drop-shadow(0_0_15px_rgba(19,169,64,0.6))] hover:[filter:drop-shadow(0_0_25px_rgba(19,169,64,0.8))] hover:brightness-110"
+            ${isPayLoading || !isComplete
+                ? "bg-[#13A940]/30 text-black/40 cursor-wait grayscale-[0.5]" 
+                : "bg-[#13A940] text-black cursor-pointer [filter:drop-shadow(0_0_15px_rgba(19,169,64,0.6))] hover:[filter:drop-shadow(0_0_25px_rgba(19,169,64,0.8))] hover:brightness-110"
             }
           `}
         >

@@ -31,8 +31,7 @@ const VectorEmailForm = () => {
     async function handleAction(formData: FormData) {
         // Extra safety catch
         if (!isValidEmail) return;
-
-        setIsLoading(true); // ← instant feedback
+        setIsLoading(true);
 
         const result = await subscribeUser(formData);
         
@@ -53,7 +52,11 @@ const VectorEmailForm = () => {
             <form 
                 key={isMounted ? 'hydrated' : 'empty'}    
                 ref={formRef}
-                action={handleAction}
+                onSubmit={async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.currentTarget);
+                    await handleAction(formData);
+                }}
                 className="flex flex-col md:flex-row mb-7 items-stretch gap-0 w-full max-w-xl mx-auto border border-white/30 shadow-2xl"
             >
                 <input
@@ -73,12 +76,12 @@ const VectorEmailForm = () => {
                         font-inter font-black text-sm uppercase tracking-[0.2em] whitespace-nowrap
                         px-6 py-4 transition-all duration-500 ease-out active:scale-[0.98]
                         
-                        ${isValidEmail && token && isMounted
-                        ? "bg-[#13A940] text-black cursor-pointer opacity-100 [filter:drop-shadow(0_0_15px_rgba(19,169,64,0.6))] hover:[filter:drop-shadow(0_0_25px_rgba(19,169,64,0.8))] hover:brightness-110"
-                        : "bg-[#13A940]/30 text-black/40 cursor-not-allowed [filter:none] grayscale-[0.3]" 
+                        ${isValidEmail && token && isMounted && !isLoading
+                            ? "bg-[#13A940] text-black cursor-pointer opacity-100 [filter:drop-shadow(0_0_15px_rgba(19,169,64,0.6))] hover:[filter:drop-shadow(0_0_25px_rgba(19,169,64,0.8))] hover:brightness-110"
+                            : "bg-[#13A940]/30 text-black/40 cursor-not-allowed [filter:none] grayscale-[0.3]" 
                         }
                     `}
-                >{isLoading ? 'Igniting..' : 'Get Started'}</button>
+                >{isLoading ? 'Igniting..' : 'Begin Ignition'}</button>
 
                 <input type="hidden" name="cf-turnstile-response" value={token || ''} />
                 <div className="flex justify-center md:justify-start">

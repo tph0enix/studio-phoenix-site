@@ -18,7 +18,11 @@ Dan Malinski    | Director of Manufacturing Operations  | ?                     
 Kaytlin Maddix  | Senior Director of Operations         | Merrill Manufacturing Company | https://www.linkedin.com/in/kaytlin-maddix-551479108/ | 2026-05-03 | Pending | Note omitted (out of credits)
 Chris Braniecki | Director of Operations                | IQ Manufacturing              | https://www.linkedin.com/in/chris-braniecki-b8630013/ | 2026-05-03 | Pending | Note omitted (out of credits)
 Clint Stahl     | Director of Operations                | ?                             | https://www.linkedin.com/in/clint-stahl-61b3a4a8/     | 2026-05-03 | Pending | Note omitted (out of credits)
-Michael Marette | 
-Kara Slocum     | 
-Hiten Patel     | 
-Danny Noellert  | 
+Michael (David) Marette | Director of Manufacturing Operations | Fusion Design          | https://www.linkedin.com/in/michael-marette-300568325/| 2026-05-03 | Pending | Note omitted (out of credits)
+Kara Slocum     | Director of Manufacturing Operations  | Nystrom Building Products     | https://www.linkedin.com/in/kara-slocum/              | 2026-05-03 | Pending | Note omitted (out of credits)
+Hiten Patel     | Director, Manufacturing Operations    | Orchestra Life Sciences       | https://www.linkedin.com/in/hiten-patel-51914a92/     | 2026-05-03 | Pending | Note omitted (out of credits)
+Danny Noellert  | Director, Manufacturing Operations    | Werfen                        | https://www.linkedin.com/in/dannynoellert/            | 2026-05-03 | Pending | Note omitted (out of credits) | Local
+Jim Armas       | Director of Operations, CI Leader     | Aptar                         | https://www.linkedin.com/in/jim-armas/                | 2026-05-03 | Pending | Note omitted (out of credits)
+Luigi Gigli     | Director of Manufacturing Operations  | Coxreels                      | https://www.linkedin.com/in/luigi-gigli/              | 2026-05-03 | Pending | Note omitted (out of credits)
+Shawn Henderson | Director of Manufacturing Operations  | Truck-Lite                    | https://www.linkedin.com/in/shawn-henderson-9b332a53/ | 2026-05-03 | Pending | Note omitted (out of credits)
+Lorena A.       | Director of Manufacturing Operations  | ?                             | https://www.linkedin.com/in/lorenaabarca/             | 2026-05-03 | Pending | Note omitted (out of credits)

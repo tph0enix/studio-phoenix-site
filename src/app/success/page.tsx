@@ -1,88 +1,76 @@
 'use client';
 
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { PhoenixLogo } from '@/components/PhoenixLogo';
-import { Suspense } from 'react'; // 1. Import Suspense
+import { Suspense, useEffect } from 'react';
 
-// 2. Move the UI logic into a separate internal component
 function SuccessPageContent() {
-  const searchParams = useSearchParams();
-  const paymentIntentId = searchParams.get('payment_intent');
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete('payment_intent_client_secret');
+    url.searchParams.delete('payment_intent');
+    url.searchParams.delete('redirect_status');
+    window.history.replaceState({}, '', url.toString());
+  }, []);
 
   return (
-    <main className="min-h-screen bg-[#0D0D0D] flex flex-col items-center justify-center p-6 font-mono">
-      {/* Branding Header */}
-      <div className="mb-12 opacity-50">
-        <PhoenixLogo 
-          src="/images/branding/logo_full_english.svg" 
-          className="h-auto w-24"
-        />
-      </div>
+    <main className="min-h-screen bg-[#0D0D0D] flex flex-col items-center justify-center px-4 py-6">
+      <div className="fixed inset-0 bg-black/95 backdrop-blur-md -z-0" />
+      <div className="bg-[#0D0D0D] border border-phoenix-orange/20 max-w-lg w-full p-8 md:p-10 relative shadow-[0_0_80px_rgba(255,102,0,0.05)] my-auto z-10">
 
-      <div className="max-w-md w-full border border-white/10 bg-white/[0.02] p-8 md:p-12 relative overflow-hidden">
-        {/* Decorative Corner Accents */}
-        <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-phoenix-orange"></div>
-        <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-phoenix-orange"></div>
+        {/* Logo */}
+        <div className="flex justify-center mb-8">
+          <PhoenixLogo 
+            src="/images/branding/logo_full_english.svg" 
+            className="h-auto w-24 md:w-32"
+          />
+        </div>
 
-        <div className="space-y-8">
-          {/* Header Status */}
-          <div className="border-l-2 border-[#13A940] pl-5 space-y-1">
-            <p className="text-[#13A940] text-[9px] font-black tracking-[0.4em] uppercase">
-              Phase 04 / Finalized
-            </p>
-            <h1 className="text-2xl font-inter font-black text-white uppercase tracking-tighter">
-              Roadmap Secured
-            </h1>
-          </div>
+        {/* Header */}
+        <div className="mb-8 border-l-2 border-[#13A940] pl-5">
+          <h1 className="text-3xl font-inter font-black text-white uppercase tracking-tighter leading-none">
+            Session Secured
+          </h1>
+        </div>
 
-          {/* System Report Content */}
-          <div className="space-y-4 text-sm leading-relaxed">
-            <p className="text-white/70">
-              The diagnostic deposit has been successfully authorized and the transmission is complete.
-            </p>
-            
-            <div className="bg-black/40 border border-white/5 p-4 space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-[10px] text-white/30 uppercase tracking-widest">Gateway_Status</span>
-                <span className="text-[10px] text-[#13A940] font-bold uppercase tracking-widest">Confirmed</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-[10px] text-white/30 uppercase tracking-widest">Vector_ID</span>
-                <span className="text-[10px] text-phoenix-orange font-bold truncate max-w-[120px]">
-                  {paymentIntentId?.slice(-12) || "PI_UNKNOWN"}
-                </span>
-              </div>
-            </div>
+        {/* Content */}
+        <div className="space-y-6">
 
-            <p className="text-white/50 text-[11px] italic">
-              Confirmation details have been dispatched to your contact email. Check your calendar for the finalized invite.
-            </p>
-          </div>
+          <p className="text-white text-2xl font-inter font-black uppercase tracking-tight leading-tight">
+            Your data's future: <span className="text-phoenix-orange">relit</span>
+          </p>
+          <p className="text-white/60 text-sm leading-relaxed">
+            Your discovery call is confirmed and your $250 deposit is in. Your spreadsheets don't know what's coming. <br/><br/>Check your email and calendar for your session details — see you soon!
+          </p>
 
-          {/* Action */}
+          {/* Return Link */}
           <div className="pt-4 border-t border-white/5">
             <Link 
-              href="/" 
-              className="group flex items-center gap-3 text-[10px] text-white/40 uppercase tracking-widest hover:text-white transition-all"
+              href="https://vector.studiophoenix.ink"
+              className="w-full block text-center border border-white/10 text-white font-inter font-bold text-xs uppercase tracking-[0.4em] py-3 hover:border-phoenix-orange hover:text-phoenix-orange transition-all duration-300"
             >
-              <span className="text-phoenix-orange group-hover:translate-x-[-4px] transition-transform">←</span> 
-              Return to Terminal
+              Return Home
             </Link>
           </div>
-        </div>
-      </div>
 
-      {/* Background Grid/Detail */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] -z-10"></div>
+        </div>
+
+        {/* Background Grid */}
+        <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] -z-10"></div>
+
+      </div>
     </main>
   );
 }
 
-// 3. The main export just wraps the content in Suspense
 export default function SuccessPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center text-white/30 font-mono text-xs uppercase tracking-widest">Initializing Terminal...</div>}>
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center text-white/30 font-mono text-xs uppercase tracking-widest">
+        Initializing...
+      </div>
+    }>
       <SuccessPageContent />
     </Suspense>
   );

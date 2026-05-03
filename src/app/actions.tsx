@@ -45,7 +45,7 @@ export async function createBooking(payload: {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       ...payload,
-      end: new Date(new Date(payload.start).getTime() + 30 * 60000).toISOString(), // Assume 30 min session
+      end: new Date(new Date(payload.start).getTime() + 60 * 60000).toISOString(), // 60 min window
       timeZone: "America/New_York", // Or detect from user
       language: "en"
     }),

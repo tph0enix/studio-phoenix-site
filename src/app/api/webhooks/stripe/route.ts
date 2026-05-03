@@ -50,7 +50,8 @@ export async function POST(req: Request) {
       });
 
       const calData = await calResponse.json();
-      console.log("[CAL_BOOKING_SUCCESS]:", calData);
+      console.log("[CAL_RESPONSE_STATUS]:", calResponse.status);
+      console.log("[CAL_RESPONSE_BODY]:", JSON.stringify(calData, null, 2));
 
     } catch (error) {
       console.error("[CAL_BOOKING_FAILED]:", error);
