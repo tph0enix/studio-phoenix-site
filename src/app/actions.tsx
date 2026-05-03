@@ -133,7 +133,7 @@ export async function createPaymentIntent(data: {
     }
 
     const paymentIntent = await stripeInstance.paymentIntents.create({
-      amount: 25000, //250.00
+      amount: 100, //250.00
       currency: 'usd',
       automatic_payment_methods: { enabled: true },
       metadata: {
