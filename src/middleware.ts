@@ -11,7 +11,11 @@ export function middleware(req: NextRequest) {
   // 2. The "Only Touch Pages" Rule
   // We only rewrite if the path is the root (/) OR a sub-page (/about)
   // We EXPLICITLY ignore anything with a dot (files) or Next.js internals
-  const isPageRequest = pathname === '/' || (!pathname.includes('.') && !pathname.startsWith('/_next'));
+  const isPageRequest = pathname === '/' || (
+    !pathname.includes('.') && 
+    !pathname.startsWith('/_next') &&
+    !pathname.startsWith('/api/')
+  );
 
   if (isVectorSubdomain && isPageRequest) {
     // Prevent double-rewriting
