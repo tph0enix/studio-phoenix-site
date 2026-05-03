@@ -1,2 +1,189 @@
 Sign-in email: TristanPhoenix@StudioPhoenixVector.onmicrosoft.com
 Tenant ID: a3f9de4d-52c9-462b-a142-bba07cf11c9a
+
+If they have Power BI:
+    What's needed to connect to client Power BI API & Scanner:
+    1. They need to register an app (and put in a Security Group for max security) in their Microsoft Entra ID (Azure AD); from there, get:
+        - Their Tenant ID
+        - Client ID (Application ID)
+        - Client Secret (Ask them to set the secret to expire in 3 months (or however long the contract is) for their own security.)
+    2. Have their Power BI Admin enable these specific toggles in the Power BI Admin Portal (ideally just for the Security Group):
+        * Allow service principals to use Power BI APIs: This must be "Enabled."
+        * Service principals can use read-only admin APIs
+        * Metadata Scanning (Scanner API) Settings:
+            + Enhance admin APIs responses with detailed metadata: Required to see table and column names.
+            + Enhance admin APIs responses with DAX and mashup expressions: Mandatory for your identifying DAX vs. Power Query logic.
+    3. Scanner API: add the Service Principal as a "Member" to every workspace they want audited.
+        * possibility to automate workspace additions?
+
+In either case, also look at non-Power BI files.
+    1. Use an Endpoint Management tool (Intune, MECM, or Defender for Endpoint) and do also:
+    2. Look through other locations like SharePoint and shared drives
+
+    For those steps, do this:
+        * Do a file distribution assessment
+            - What files there are
+            - Whether the files contain macros
+            - Latest activity
+            - Storage volume
+        * Look through file Metadata
+            - Connection info
+            - Formulas vs Raw Values
+            - Duplicate filenames & sizes
+    
+If Vector is used, they'll need to do the first section anyway, if they're looking for governance as well
+
+Factors to look at:
+- Automation
+    * Definition: the ability of a system to run itself without human intervention
+    * Benefits: more high-value time, more confidence in numbers
+    * Contributing Factors: 
+        - Data Entry: Manual data entry
+        - Data Sourcing: Isolated data sources
+        - Formulation: Narrow formulation (e.g., formulas that must be copy-pasted, vs logic that applies everywhere?)
+        - Parameter Adaptability: Hard-coded parameters
+        - Event-Driven Triggers: Lack of event-driven triggers
+        - Distribution Methods: Manual distribution methods
+    * Improvements: 
+        - Automated/formulaic data entry
+        - Shared data sources
+        - Adaptive, wide-reaching logic
+        - Dynamic parameters
+        - Event-driven triggers
+        - Automated distribution methods
+    * Future Loss Prevention: 
+        - Is there a trusted source of truth where this number comes from?
+        - Look at the owner of each part used in this file; will any of it break if an owner leaves?
+        - Does the logic need to be copied or adapted somewhere manually?
+        - Will this parameter likely need to be changed in the future?
+        - Does someone need to trigger something for this process to work? And is there a chance for times to not line up for this process to work perfectly?
+        - Does someone have to monitor this distribution for quality, accuracy, or timeliness?
+
+- Performance
+    * Definition: the ability of a system to run & adapt quickly without failure
+    * Benefits: faster answers, more uptime, less task-switching
+    * Contributing Factors: 
+        - Architecture (External): Slow external architecture (unstable data sources, slow network, overscheduled refreshes, capacity, gateway)
+        - Architecture (Internal): Slow internal architecture (misordered transformations, bloated data types, unnecessarily dynamic logic)
+        - Necessity: Unnecessary items (fields, rows, tables [visible & invisible], steps, visuals, "just in case" items, flattened tables with duplicated info)
+        - Logic Placement: Misplaced logic (DAX vs Power Query, local logic vs logic done in/sent to source)
+        - Adaptable Elements: Unadaptive elements (manual coding, duplicate business logic)
+    * Improvements: 
+        - Rapid external architecture (responsive sources, rapid & close network connection, spread-out refreshes, reduced capacity load, well-maintained gateway)
+        - Rapid internal architecture (ideal transformation order, bare minimum data types, static logic when wise)
+        - Lean items (only necessary fields, rows, tables, steps, & visuals; only immediately [or extremely likely in future] necessary items; star schema)
+        - Logic placed in its native habitat
+        - Adaptive elements when possible & necessary (business logic moved upstream, dynamic coding)
+    * Future Loss Prevention: 
+        - Are there items outside my report that could affect the report, and will my report adapt properly?
+        - Are there items in my report that could break?
+        - Is there anything here that, if removed, would not affect end users?
+        - Is there any logic here that could be used by a wider audience, or done more efficiently by another system?
+        - Are there likely changes that could break my report?
+
+- Governance
+    * Definition: the ability of a system to be internally coherent & readily actionable
+    * Benefits: predictable usage, unlocked insights, protection of other metrics, solid foundation for expansion, more control over reporting
+    * Contributing Factors: 
+        - Naming: Inconsistent naming conventions
+        - Placment: Inconsistent object placement (are all objects where one would practically expect them to be?)
+        - Ownership: Unclear ownership (current & contingent)
+        - Knowledge Base: Administrative knowledge gaps
+        - Object Identity: Unclear object definitions, scope, & intent
+        - Access: Unclear access rules
+        - History: Unclear history
+        - Troubleshooting: Lack of troubleshooting tools
+        - Truth Sourcing: Many/Unstable sources of truth
+        - Management: Unmanaged automation, performance, governance, training, and storytelling
+    * Improvements: 
+        - Consistent naming conventions
+        - Predictable object placement
+        - Clearly defined ownership (current & contingent)
+        - Confidence in current reporting status
+        - Clear object definitions, scope, & intent
+        - Clearly defined roles for accessing information
+        - Clearly documented history
+        - Readily available tools for troubleshooting
+        - Reliable data sourcing
+        - Readily managed automation, performance, governance, training, and storytelling
+    * Loss Prevention: 
+        - Does this naming convention fit with other reporting models?
+        - Is this object where one would naturally expect it to be?
+        - Is it clear who takes action if this object needs to change, now and in future scenarios?
+        - Could something happen in reporting that we are unaware of?
+        - Could this object's meaning, limitation, or purpose be reasonably misconstrued?
+        - If someone requested access to this item, are there clear rules determining whether they are accepted & what level of access they should have?
+        - If we have to understand why something changed in the past, is there centralized documentation stating the reasons?
+        - If there is a problem in the data, can I readily trace the problem back to the source & identify a solution?
+        - If one source of truth changed, would reporting coherence increase or remain consistent?
+        - Is it clear whether the company needs to improve automation, performance, governance, training, or storytelling in any section of reporting?
+
+- Training
+    * Definition: the ability of a system to be used to the best of its ability
+    * Benefits: metric improvement
+    * Contributing Factors: 
+        - Tool Usage: Low tool usage
+        - Feature Usage (Existence): Unused features
+        - Feature Usage (Appropriateness): Misused features
+        - Feature Usage (Balance): Overused features
+        - Exposure: Lack of exposure
+        - Resources: Lack of resources (employees to use the tool, usage training)
+        - Feedback Loop: Unknown knowledge gaps (you don't know what you don't know til you know)
+    * Improvements: 
+        - Increased tool usage
+        - Increased feature usage
+        - Appropriately used feature usage
+        - Balanced feature usage
+        - Improved tool rollout
+        - Available resources (employees to use the tool, usage training)
+        - Feedback loops about the tool
+    * Loss Prevention: 
+        - If more people used this tool, would anyone's life be significantly improved?
+        - If more people used these features, would anyone's life be significantly improved?
+        - Is there a better feature in this tool to accomplish the goal?
+        - Was this feature made for usage like this?
+        - If more people were introduced to this tool, would curiosity spark enough to increase usage?
+        - If more employees were available to use the tool, or more employees were properly trained, would anyone's life be significantly improved?
+        - Is there a readily available method of communication for feedback on the tool?
+
+- Storytelling
+    * Definition: the ability of a system to completely inform its users of its purpose
+    * Benefits: improved report usage, unlocked insights, less training time, faster problem-solving
+    * Contributing Factors:
+        - Goals: Unclear goals
+        - Status: Unclear status
+        - Contributing Factors: Unclear contributing Factors
+        - Call to Action: Unclear call to action
+        - Definitions: Unclear definitions
+        - Indicators: Unclear indicators
+        - Implications: Unclear implications
+        - Information Connectivity: Disconnected information
+        - Visualization (Quantity): Too many visuals
+        - Visualization (Quality): Disorganized visuals
+        - Information Speed: Delayed information
+    * Improvements: 
+        - Clearly defined goals
+        - Clearly defined status
+        - Clearly defined contributing Factors
+        - Clearly defined necessary next steps
+        - Clearly stated definitions
+        - Clearly & consistently used indicators
+        - Clearly stated implications
+        - Connected relevant information
+        - Only necessary visuals
+        - Well-placed visuals
+        - Timely information
+    * Loss Prevention: 
+        - Is it clear what the goal--and not just the topic--of this report is?
+        - Is it clear what the status of the business is for this situation?
+        - Are the contributing factors listed completely and clearly, contributing to the current status?
+        - Is it clear what the business needs to do next to make the status meet business goals?
+        - Are all terms and assumptions made clear to report viewers, regardless of expertise?
+        - Does each color have a clear meaning in every visual on every page (and ideally in every report)?
+        - Does the data displayed in this report make clear business implications?
+        - Is there tangentially related information easily accessible from this report?
+        - Would quality be lost if any visual were to be removed from the report?
+        - Does the placement of these visuals add clarity to the report?
+        - Would more rapidly conveyed information help the business make better decisions?
+
+Note: a low score DOES NOT mean your system is broken. Your system has run exactly as it's needed to run for the people involved; people need something quickly & have to do it themselves, then they do, using the knowledge & time they have. And the presence of challenges & obstacles is not an indication of something broken--it means it's time to adapt differently. And that's where Studio Phoenix can help.

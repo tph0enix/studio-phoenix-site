@@ -9,8 +9,8 @@ export default function robots(): MetadataRoute.Robots {
             disallow: ['/api/', '/_next/'], // Keep them out of the internal wiring
         },
         {
-            // THE AI BLOCKLIST
-            userAgent: ['GPTBot', 'ChatGPT-User', 'CCBot', 'Claude-Web', 'ClaudeBot', 'Google-Extended', 'OAI-SearchBot'],
+            // blocks training crawlers only
+            userAgent: ['GPTBot', 'CCBot', 'Google-Extended'],
             disallow: '/',
         }
     ],
