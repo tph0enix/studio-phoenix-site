@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Turnstile } from '@marsidev/react-turnstile';
+import { Turnstile, TurnstileInstance  } from '@marsidev/react-turnstile';
 import { subscribeUser } from '@/app/actions';
 import AuditModal from './AuditModal';
 
@@ -14,6 +14,7 @@ const VectorEmailForm = () => {
     const [isModalOpen, setIsModalOpen] = useState(false); // THE MODAL TRIGGER
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+    const turnstileRef = useRef<TurnstileInstance>(null);
 
     // 1. The Logic Lock: Start as 'true' to match the server's expected default
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -45,6 +46,10 @@ const VectorEmailForm = () => {
 
     return (
         <>
+            {/* First email form — top of page */}
+            <p className="text-sm text-white font-inter font-bold uppercase tracking-widest text-center px-6 mb-4">
+                Start with a discovery call — <span className="text-phoenix-orange">$250</span>, applied toward your project.
+            </p>
             <form 
                 key={isMounted ? 'hydrated' : 'empty'}    
                 ref={formRef}
@@ -80,6 +85,7 @@ const VectorEmailForm = () => {
                     {/* 4. Only render Turnstile once mounted to avoid server-side interference */}
                     {isMounted && (
                         <Turnstile 
+                            ref={turnstileRef}
                             siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY!} 
                             onSuccess={(token) => setToken(token)}
                             options={{
@@ -95,7 +101,13 @@ const VectorEmailForm = () => {
             {isModalOpen && (
                 <AuditModal 
                     email={email} 
-                    onClose={() => setIsModalOpen(false)} 
+                    onClose={() => {
+                        setIsModalOpen(false);
+                        setIsLoading(false);
+                        setEmail(''); // ← clears email field, fresh start
+                        setToken(null); // ← reset turnstile
+                        turnstileRef.current?.reset(); // ← forces Turnstile to re-verify
+                    }}
                 />
             )}
         </>

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import Link from 'next/link';
 import { PhoenixLogo } from '../../components/PhoenixLogo';
 import { getAvailableSlots, createPaymentIntent } from '@/app/actions';
@@ -31,7 +31,6 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
   const EVENT_TYPE_ID = 5474611;
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  // Logic to calculate the dynamic date range for the header
   const getRangeDisplay = () => {
     const sorted = Object.keys(slots).sort();
     if (sorted.length === 0) return 'SELECT DATE';
@@ -45,25 +44,20 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
   const loadSlots = async () => {
     setIsLoading(true);
     const start = new Date().toISOString();
-    // 60 day window to ensure we see the new availability
     const end = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(); 
     
     try {
       const data = await getAvailableSlots(EVENT_TYPE_ID, start, end);
-      console.log("CAL_API_DATA_RECEIVED:", data); // Check F12 Console for this!
+      console.log("CAL_API_DATA_RECEIVED:", data);
 
       if (!data) {
         setSlots({});
         return;
       }
 
-      // v2 often returns an object: { "2026-04-24": [...] }
-      // If it's already an object, we just use it.
       if (!Array.isArray(data) && typeof data === 'object') {
         setSlots(data);
-      } 
-      // If it's an array, we group it manually using the local date key.
-      else if (Array.isArray(data)) {
+      } else if (Array.isArray(data)) {
         const grouped: Record<string, any[]> = {};
         data.forEach((slot: any) => {
           const dateObj = new Date(slot.time);
@@ -108,10 +102,6 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
     if (step === 2) loadSlots();
   }, [step]);
 
-  const handleBookingSelection = (time: string) => {
-    setSelectedSlot(time);
-  };
-
   const toggleVector = (vector: string) => {
     setSelectedVectors(prev => 
       prev.includes(vector) ? prev.filter(v => v !== vector) : [...prev, vector]
@@ -120,8 +110,8 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
 
   const options = ["Automation", "Performance/Stability", "Governance", "Training", "Other"];
 
-  // Boolean to check if both date and time are selected
   const isReadyToProceed = !!selectedDate && !!selectedSlot;
+  const canProceed = name.trim().length > 0 && selectedVectors.length > 0;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md px-4 py-6 overflow-y-auto">
@@ -152,19 +142,16 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
         {/* PHASE 01: CONTEXT */}
         {step === 1 && (
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="space-y-1">
-              <label className="text-[10px] text-white uppercase tracking-widest font-bold">Contact Email</label>
-              <input 
-                type="email" 
-                value={userEmail} 
-                onChange={(e) => setUserEmail(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 px-4 py-2 text-white font-sans text-sm focus:border-phoenix-orange outline-none transition-colors"
-              />
-            </div>
+
+            <p className="text-[9px] text-white/40 uppercase tracking-widest">
+              Fields marked <span className="text-phoenix-orange">*</span> are required
+            </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] text-white uppercase tracking-widest font-bold">Contact Person</label>
+                <label className="text-[10px] text-white uppercase tracking-widest font-bold">
+                  Contact Person <span className="text-phoenix-orange">*</span>
+                </label>
                 <input 
                   type="text" 
                   value={name}
@@ -173,6 +160,7 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
                   className="w-full bg-black border border-white/20 px-4 py-2 text-white text-sm outline-none focus:border-phoenix-orange transition-colors" 
                 />
               </div>
+
               <div className="space-y-1">
                 <label className="text-[10px] text-white uppercase tracking-widest font-bold">Organization</label>
                 <input 
@@ -187,7 +175,8 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
 
             <div className="space-y-4">
               <label className="text-[10px] text-white uppercase tracking-widest font-bold block">
-                What can we help with?<span className="text-phoenix-orange italic capitalize"> (Select all that apply)</span>
+                What can we help with? <span className="text-phoenix-orange">*</span>
+                <span className="text-phoenix-orange italic capitalize normal-case"> (Select all that apply)</span>
               </label>
               <div className="flex flex-wrap gap-2">
                 {options.map((option) => (
@@ -207,18 +196,48 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
               </div>
             </div>
 
+            <div className="space-y-1">
+              <label className="text-[10px] text-white uppercase tracking-widest font-bold">Contact Email</label>
+              <input 
+                type="email" 
+                value={userEmail} 
+                onChange={(e) => setUserEmail(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 px-4 py-2 text-white font-sans text-sm focus:border-phoenix-orange outline-none transition-colors"
+              />
+            </div>
+
             <button 
               onClick={() => setStep(2)}
-              className="w-full bg-[#13A940] text-black font-inter font-black uppercase text-xs py-4 tracking-[0.4em] hover:brightness-110 transition-all cursor-pointer"
+              disabled={!canProceed}
+              className={`w-full font-inter font-black uppercase text-xs py-4 tracking-[0.4em] transition-all
+                ${canProceed
+                  ? "bg-[#13A940] text-black cursor-pointer hover:brightness-110"
+                  : "bg-[#13A940]/30 text-black/40 cursor-not-allowed"
+                }
+              `}
             >
-              Check Availability
+              Initiate Vector
             </button>
+
+            <p className="text-[9px] text-white/40 uppercase tracking-widest text-center">
+              $250 discovery call — applied toward your project if you move forward
+            </p>
+
           </div>
         )}
 
         {/* PHASE 02: SCHEDULING */}
         {step === 2 && (
           <div className="space-y-8 animate-in fade-in duration-500">
+
+            {/* Back button — top of phase, always visible */}
+            <button 
+              onClick={() => setStep(1)} 
+              className="text-[9px] text-white/40 uppercase tracking-widest hover:text-white transition-colors cursor-pointer flex items-center gap-2"
+            >
+              ← Back to calibration
+            </button>
+
             {isLoading ? (
               <div className="h-64 flex flex-col items-center justify-center border border-dashed border-white/10 bg-white/[0.01]">
                 <p className="text-[10px] text-phoenix-orange animate-pulse uppercase tracking-[0.3em]">Fetching Availability...</p>
@@ -244,15 +263,12 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
                   </div>
 
                   <div className="grid grid-cols-7 gap-1">
-                    {/* Length check to prevent empty grid display */}
                     {Object.keys(slots).length > 0 ? (
                       Object.keys(slots).map((dateKey, index) => {
-                        // Consistent T12:00:00 anchor for grid boxes
                         const dateObj = new Date(dateKey + 'T12:00:00'); 
                         const dayOfMonth = dateObj.getDate();
                         const dayOfWeek = dateObj.getDay();
 
-                        // Identify if we've crossed into a new month
                         const prevDateKey = Object.keys(slots)[index - 1];
                         const isNewMonth = prevDateKey && new Date(prevDateKey + 'T12:00:00').getMonth() !== dateObj.getMonth();
 
@@ -262,7 +278,6 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
 
                         return (
                           <React.Fragment key={dateKey}>
-                            {/* Blue visual divider inserted between months */}
                             {isNewMonth && (
                               <div className="col-span-7 flex items-center gap-3 py-6">
                                 <div className="h-[1px] flex-grow bg-blue-flame/30"></div>
@@ -283,7 +298,7 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
                               style={gridStyle}
                               className={`aspect-square flex flex-col items-center justify-center border transition-all ${
                                 selectedDate === dateKey 
-                                  ? "bg-phoenix-orange text-black" // High-contrast solid active state
+                                  ? "bg-phoenix-orange text-black"
                                   : "border-white/10 text-white hover:border-white/40 bg-white/[0.02]"
                               }`}
                             >
@@ -293,7 +308,6 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
                         );
                       })
                     ) : (
-                      // Explicit fallback UI if slots array returns empty from API
                       <div className="col-span-7 py-10 text-center border border-dashed border-white/5">
                         <p className="text-[10px] text-white/20 uppercase tracking-widest">No availability found</p>
                       </div>
@@ -304,7 +318,7 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
                 {selectedDate && slots[selectedDate] && (
                   <div className="space-y-3 animate-in fade-in slide-in-from-top-2 duration-300 mt-8">
                     <label className="text-[10px] text-white uppercase tracking-widest font-bold block">
-                      02. Select Starting Time (30 Mins) <span className="text-phoenix-orange">[{selectedDate}]</span>
+                      02. Select Starting Time (45 Mins) <span className="text-phoenix-orange">[{selectedDate}]</span>
                     </label>
                     <div className="grid grid-cols-3 gap-2">
                       {slots[selectedDate].map((slot: any) => (
@@ -312,7 +326,6 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
                           key={slot.time}
                           type="button"
                           onClick={() => setSelectedSlot(slot.time)}
-                          // Hover & Active strictly Orange. No Green here.
                           className={`py-3 text-[10px] font-mono border transition-all text-center uppercase ${
                             selectedSlot === slot.time
                               ? "bg-phoenix-orange text-black border-phoenix-orange"
@@ -328,11 +341,10 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
               </div>
             )}
 
-            {/* Main action button at the bottom of Phase 02 */}
-            <div className="pt-6 space-y-4">
+            {/* Confirm button */}
+            <div className="pt-6">
               <button 
                 type="button" 
-                // Disable if already processing
                 disabled={!isReadyToProceed || isProcessing} 
                 onClick={preparePayment}
                 className={`
@@ -345,15 +357,7 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
                     }
                 `}
               >
-                {/* Dynamic button text */}
                 {isProcessing ? "SECURING SLOT..." : "Confirm Meeting Window"}
-              </button>
-
-              <button 
-                onClick={() => setStep(1)} 
-                className="text-[9px] text-white/40 uppercase tracking-widest hover:text-white pt-4 cursor-pointer"
-              >
-                [Back to basic info]
               </button>
             </div>
           </div>

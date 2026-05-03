@@ -7,7 +7,7 @@ const VectorProof = () => {
     },
     { 
       value: '6+', 
-      label: 'Hours of Daily Data Load Improvement', 
+      label: 'Hours Recovered Daily in Load Times', 
       detail: 'Faster answers. Less task switching.'
     },
     { 

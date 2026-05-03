@@ -38,18 +38,33 @@ const HeadlessCheckoutForm = ({ selectedSlot, onBack }: HeadlessCheckoutFormProp
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
+
+      {/* Back button — top, always visible */}
+      <button 
+        type="button" 
+        onClick={onBack} 
+        className="text-[9px] text-white/40 uppercase tracking-widest hover:text-white transition-colors cursor-pointer flex items-center gap-2"
+      >
+        ← Change Schedule
+      </button>
       
       {/* Window Summary */}
       <div className="border border-white/10 p-5 bg-white/[0.02] space-y-2">
-         <p className="text-[10px] text-white uppercase tracking-widest font-bold">03. SECURE RESERVATION</p>
-         <div className="flex flex-col gap-1">
-            <p className="text-sm text-white font-mono font-bold">
-              {new Date(selectedSlot).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
-            </p>
-            <p className="text-sm text-phoenix-orange font-mono font-bold uppercase">
-              {new Date(selectedSlot).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-            </p>
-         </div>
+        <p className="text-[10px] text-white uppercase tracking-widest font-bold">03. Secure Reservation</p>
+        <div className="flex flex-col gap-1">
+          <p className="text-sm text-white font-mono font-bold">
+            {new Date(selectedSlot).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+          </p>
+          <p className="text-sm text-phoenix-orange font-mono font-bold uppercase">
+            {new Date(selectedSlot).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </p>
+        </div>
+        <p className="text-[10px] text-white/80 tracking-wide leading-relaxed pt-2">
+          Discovery call — we learn your environment, you learn how we work.
+        </p>
+        <p className="text-[9px] text-white/60 tracking-wide leading-relaxed">
+          Applied toward your project if you move forward. Non-refundable if not.
+        </p>
       </div>
 
       {/* The Stripe iFrame Container */}
@@ -65,19 +80,11 @@ const HeadlessCheckoutForm = ({ selectedSlot, onBack }: HeadlessCheckoutFormProp
             w-full font-inter font-black uppercase text-xs py-5 tracking-[0.4em] transition-all duration-500
             ${isPayLoading 
               ? "bg-[#13A940]/30 text-black/40 cursor-wait grayscale-[0.5]" 
-              : "bg-[#13A940] text-black cursor-pointer hover:brightness-110 [filter:drop-shadow(0_0_15px_rgba(19,169,64,0.4))]"
+              : "bg-[#13A940] text-black cursor-pointer [filter:drop-shadow(0_0_15px_rgba(19,169,64,0.6))] hover:[filter:drop-shadow(0_0_25px_rgba(19,169,64,0.8))] hover:brightness-110"
             }
           `}
         >
-          {isPayLoading ? "AUTHORIZING..." : "FINALIZE $250 DEPOSIT"}
-        </button>
-
-        <button 
-          type="button" 
-          onClick={onBack} 
-          className="w-full text-[9px] text-white/40 uppercase tracking-widest hover:text-white transition-colors"
-        >
-          [Change schedule]
+          {isPayLoading ? "AUTHORIZING..." : "SECURE MY DISCOVERY CALL — $250"}
         </button>
       </div>
 
