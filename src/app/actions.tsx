@@ -136,6 +136,7 @@ export async function createPaymentIntent(data: {
       amount: 100, //250.00
       currency: 'usd',
       automatic_payment_methods: { enabled: true },
+      receipt_email: data.email, // ← this is what sends the customer their receipt
       metadata: {
         customer_email: data.email,
         scheduled_slot: data.slot,
