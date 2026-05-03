@@ -68,7 +68,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-bright-white font-bold mb-4 text-sm tracking-[0.2em]">[07] DATA_COLLECTION & PRIVACY</h2>
             <p>
-              When you submit your business email via this site, it is collected solely for the purpose of initiating a consultation or service inquiry with Studio Phoenix LLC. We do not sell or share your contact information with third parties. You may request removal from our records at any time by contacting tristan.storm.phoenix@studiophoenix.ink. For full details on how we handle your data, refer to our Privacy Policy.
+              When you submit your business email via this site, it is collected solely for the purpose of initiating a consultation or service inquiry with Studio Phoenix LLC. We do not sell or share your contact information with third parties. You may request removal from our records at any time by contacting support@studiophoenix.ink. For full details on how we handle your data, refer to our Privacy Policy.
             </p>
           </section>
 

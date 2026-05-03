@@ -1,51 +1,49 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { Turnstile, TurnstileInstance  } from '@marsidev/react-turnstile';
-import { subscribeUser } from '@/app/actions';
+import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile';
+import { sendVerificationCode } from '@/app/actions';
 import AuditModal from './AuditModal';
+import VerifyModal from './VerifyModal';
 
 const VectorEmailForm = () => {
     const formRef = useRef<HTMLFormElement>(null);
     const [email, setEmail] = useState('');
     const [token, setToken] = useState<string | null>(null);
     const [isMounted, setIsMounted] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false); // THE MODAL TRIGGER
     const [isLoading, setIsLoading] = useState(false);
-    const router = useRouter();
+    const [isVerifyOpen, setIsVerifyOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const turnstileRef = useRef<TurnstileInstance>(null);
 
-    // 1. The Logic Lock: Start as 'true' to match the server's expected default
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-
-    // 2. Component Ignition
     useEffect(() => {
         setIsMounted(true);
     }, []);
 
-    // 1. Validation Logic
-    // Ensures there is text before and after the @ and a dot in the domain.
     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     async function handleAction(formData: FormData) {
-        // Extra safety catch
         if (!isValidEmail) return;
         setIsLoading(true);
 
-        const result = await subscribeUser(formData);
-        
-        if (result.success) {
-            setIsModalOpen(true);
-        } else {
-            alert(result.error);
-            setIsLoading(false); // ← only reset on error
-        }
+        // Only send verification code — do NOT store email yet
+        await sendVerificationCode(email);
+
+        setIsLoading(false);
+        setIsVerifyOpen(true);
     }
+
+    const handleReset = () => {
+        setIsVerifyOpen(false);
+        setIsModalOpen(false);
+        setIsLoading(false);
+        setEmail('');
+        setToken(null);
+        turnstileRef.current?.reset();
+    };
 
     return (
         <>
-            {/* First email form — top of page */}
             <p className="text-sm text-white font-inter font-bold uppercase tracking-widest text-center px-6 mb-4">
                 Start with a discovery call — <span className="text-phoenix-orange">$250</span>, applied toward your project.
             </p>
@@ -70,9 +68,8 @@ const VectorEmailForm = () => {
                 />
                 <button
                     type="submit"
-                    disabled={!isMounted || !isValidEmail || !token || isLoading }
+                    disabled={!isMounted || !isValidEmail || !token || isLoading}
                     className={`
-                        /* BASE ENGINE STATE */
                         font-inter font-black text-sm uppercase tracking-[0.2em] whitespace-nowrap
                         px-6 py-4 transition-all duration-500 ease-out active:scale-[0.98]
                         
@@ -81,11 +78,12 @@ const VectorEmailForm = () => {
                             : "bg-[#13A940]/30 text-black/40 cursor-not-allowed [filter:none] grayscale-[0.3]" 
                         }
                     `}
-                >{isLoading ? 'Igniting..' : 'Begin Ignition'}</button>
+                >
+                    {isLoading ? 'Igniting...' : 'Begin Ignition'}
+                </button>
 
                 <input type="hidden" name="cf-turnstile-response" value={token || ''} />
                 <div className="flex justify-center md:justify-start">
-                    {/* 4. Only render Turnstile once mounted to avoid server-side interference */}
                     {isMounted && (
                         <Turnstile 
                             ref={turnstileRef}
@@ -100,17 +98,23 @@ const VectorEmailForm = () => {
                 </div>
             </form>
 
-            {/* THE OVERLAY: Only fires when success is true */}
+            {/* VERIFY MODAL */}
+            {isVerifyOpen && (
+                <VerifyModal
+                    email={email}
+                    onVerified={() => {
+                        setIsVerifyOpen(false);
+                        setIsModalOpen(true);
+                    }}
+                    onClose={handleReset}
+                />
+            )}
+
+            {/* AUDIT MODAL */}
             {isModalOpen && (
                 <AuditModal 
                     email={email} 
-                    onClose={() => {
-                        setIsModalOpen(false);
-                        setIsLoading(false);
-                        setEmail(''); // ← clears email field, fresh start
-                        setToken(null); // ← reset turnstile
-                        turnstileRef.current?.reset(); // ← forces Turnstile to re-verify
-                    }}
+                    onClose={handleReset}
                 />
             )}
         </>

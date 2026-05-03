@@ -1,6 +1,6 @@
 'use client';
 
-import { GraduationCap, Bot, Landmark, Gauge } from 'lucide-react';
+import { GraduationCap, Bot, Landmark, Gauge, Book } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 const VectorServices = () => {
@@ -62,6 +62,11 @@ const VectorServices = () => {
             name: 'Training', 
             icon: <GraduationCap className="w-8 h-8 text-phoenix-orange" />,
             detail: 'We duplicate our expertise into your team so the standards hold.'
+        },
+        { 
+            name: 'Storytelling', 
+            icon: <Book className="w-8 h-8 text-phoenix-orange" />,
+            detail: 'Your data tells a story. We help it speak.'
         }
     ];
 

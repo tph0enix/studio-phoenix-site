@@ -41,5 +41,74 @@ model email_submissions {
   email_domain String?
   date_submit  String?
 
-  @@unique([email_local, email_domain]) // Prevents DB-level duplicates
+  @@unique([email_local, email_domain])
+}
+
+model activities {
+  activity_id              Int       @id @default(autoincrement())
+  activity_category_id     Int?
+  activity_description     String?
+  activity_timestamp_start DateTime? @db.Timestamptz(6)
+  activity_timestamp_end   DateTime? @db.Timestamptz(6)
+  include_weekends         Boolean?
+  hours_daily              Decimal?  @db.Decimal
+  project_id               Int?
+}
+
+model activity_categories {
+  activity_category_id         Int     @id @default(autoincrement())
+  activity_category_name       String?
+  activity_category_definition String?
+}
+
+model companies {
+  company_id   Int     @id @default(autoincrement())
+  company_name String?
+}
+
+model email_verifications {
+  verification_id Int       @id @default(autoincrement())
+  email           String
+  code            String
+  expires_at      DateTime  @db.Timestamptz(6)
+  created_at      DateTime? @default(now()) @db.Timestamptz(6)
+}
+
+model leads {
+  lead_id       Int      @id @default(autoincrement())
+  name          String?
+  title         String?
+  category      String?
+  url           String?
+  is_valid_lead Boolean?
+  is_messaged   Boolean?
+}
+
+model projects {
+  project_id          Int     @id @default(autoincrement())
+  project_name        String?
+  project_type        String?
+  project_description String?
+}
+
+model results {
+  result_id            Int      @id @default(autoincrement())
+  project_id           Int?
+  company_id           Int?
+  activity_category_id Int?
+  state_before_measure Decimal? @db.Decimal
+  state_before_unit_id Int?
+  state_after_measure  Decimal? @db.Decimal
+  state_after_unit_id  Int?
+  result_description   String?
+}
+
+model units {
+  unit_id                     Int     @id @default(autoincrement())
+  unit_name_long_plural       String?
+  unit_name_short             String?
+  base_unit_id                String?
+  base_unit_count_numerator   String?
+  base_unit_count_denominator String?
+  unit_name_long_singular     String?
 }

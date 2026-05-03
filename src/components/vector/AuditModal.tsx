@@ -48,7 +48,6 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
     
     try {
       const data = await getAvailableSlots(EVENT_TYPE_ID, start, end);
-      console.log("CAL_API_DATA_RECEIVED:", data);
 
       if (!data) {
         setSlots({});
@@ -84,7 +83,9 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
       const { clientSecret } = await createPaymentIntent({
         email: userEmail,
         slot: selectedSlot!,
-        name: name
+        name: name,
+        company: company,
+        vectors: selectedVectors,
       });
       
       if (clientSecret) {
@@ -92,7 +93,7 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
         setStep(3);
       }
     } catch (err) {
-      console.error("Stripe Intent Failed:", err);
+      console.error("Payment Intent Failed:", err);
     } finally {
       setIsProcessing(false);
     }
@@ -108,7 +109,7 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
     );
   };
 
-  const options = ["Automation", "Performance/Stability", "Governance", "Training", "Other"];
+  const options = ["Automation", "Performance/Stability", "Governance", "Training", "Storytelling", "Other"];
 
   const isReadyToProceed = !!selectedDate && !!selectedSlot;
   const canProceed = name.trim().length > 0 && selectedVectors.length > 0;
@@ -216,7 +217,7 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
                 }
               `}
             >
-              Initiate Vector
+              {isProcessing ? "Fetching Scheduler..." : "Confirm Info"}
             </button>
 
             <p className="text-[9px] text-white/40 uppercase tracking-widest text-center">
@@ -230,7 +231,6 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
         {step === 2 && (
           <div className="space-y-8 animate-in fade-in duration-500">
 
-            {/* Back button — top of phase, always visible */}
             <button 
               onClick={() => setStep(1)} 
               className="text-[9px] text-white/40 uppercase tracking-widest hover:text-white transition-colors cursor-pointer flex items-center gap-2"
@@ -247,7 +247,7 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
                 <div className="space-y-4">
                   <div className="flex justify-between items-end">
                     <label className="text-[10px] text-white uppercase tracking-widest font-bold">
-                      01. Select Meeting Date
+                      Select a Date
                     </label>
                     <p className="text-[9px] text-phoenix-orange font-mono uppercase tracking-widest">
                       {getRangeDisplay()}
@@ -318,7 +318,7 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
                 {selectedDate && slots[selectedDate] && (
                   <div className="space-y-3 animate-in fade-in slide-in-from-top-2 duration-300 mt-8">
                     <label className="text-[10px] text-white uppercase tracking-widest font-bold block">
-                      02. Select Starting Time (45 Mins) <span className="text-phoenix-orange">[{selectedDate}]</span>
+                      Select a Time (45 mins) <span className="text-phoenix-orange">[{selectedDate}]</span>
                     </label>
                     <div className="grid grid-cols-3 gap-2">
                       {slots[selectedDate].map((slot: any) => (
@@ -341,7 +341,6 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
               </div>
             )}
 
-            {/* Confirm button */}
             <div className="pt-6">
               <button 
                 type="button" 
@@ -357,7 +356,7 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
                     }
                 `}
               >
-                {isProcessing ? "SECURING SLOT..." : "Confirm Meeting Window"}
+                {isProcessing ? "Securing Slot..." : "Confirm Meeting Window"}
               </button>
             </div>
           </div>
@@ -385,7 +384,7 @@ const AuditModal = ({ email: initialEmail, onClose }: AuditModalProps) => {
           onClick={onClose}
           className="absolute top-6 right-6 text-white/40 hover:text-white transition-colors font-mono text-[10px] cursor-pointer"
         >
-          Close  X
+          Close X
         </button>
       </div>
     </div>
