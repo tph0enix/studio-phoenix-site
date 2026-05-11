@@ -21,9 +21,10 @@ const VectorNavbar = () => {
         </span>
       </div>
       <div className="hidden md:flex gap-8 text-[10px] font-sans font-bold uppercase tracking-[0.2em]">
-        <a href="#proof" className="text-bright-white hover:text-phoenix-orange transition-colors">Does it Work?</a>
-        <a href="#services" className="text-bright-white hover:text-phoenix-orange transition-colors">What We Do</a>
-        <a href="#about" className="text-bright-white hover:text-phoenix-orange transition-colors">About Us</a>
+        <a href="/vector#proof" className="text-bright-white hover:text-phoenix-orange transition-colors">Does it Work?</a>
+        <a href="/vector/#services" className="text-bright-white hover:text-phoenix-orange transition-colors">What We Do</a>
+        <a href="/vector/blog" className="text-bright-white hover:text-phoenix-orange transition-colors">The Signalflare Blog</a>
+        <a href="/vector/#about" className="text-bright-white hover:text-phoenix-orange transition-colors">About Us</a>
       </div>
     </nav>
   );

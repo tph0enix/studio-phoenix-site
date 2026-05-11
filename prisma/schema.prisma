@@ -112,3 +112,16 @@ model units {
   base_unit_count_denominator String?
   unit_name_long_singular     String?
 }
+
+model blog_posts {
+  post_id      Int       @id @default(autoincrement())
+  slug         String    @unique
+  title        String
+  excerpt      String?
+  content      String
+  tags         String[]
+  published    Boolean?  @default(false)
+  published_at DateTime? @db.Timestamptz(6)
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at   DateTime? @default(now()) @db.Timestamptz(6)
+}
