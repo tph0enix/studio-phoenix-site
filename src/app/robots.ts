@@ -10,13 +10,13 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: [
-          'GPTBot',
-          'CCBot',
-          'Google-Extended',
-          'Amazonbot',
-          'Applebot-Extended',
-          'Bytespider',
-          'meta-externalagent',
+          'GPTBot',           // OpenAI training only - block
+          'CCBot',            // Common Crawl training - block
+          'Amazonbot',        // Amazon training - block
+          'Bytespider',       // TikTok training - block
+          'meta-externalagent', // Meta training - block
+          // Removed: Google-Extended (blocks AI Overviews)
+          // Removed: Applebot-Extended (blocks Apple search)
         ],
         disallow: '/',
       }
