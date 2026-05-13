@@ -1,0 +1,18 @@
+1. Automation
+Commercial: business process automation consultant, spreadsheet automation consultant, report automation consulting, Excel automation services, manual process automation consultant
+Informational: how to automate Excel reports, how to eliminate manual data entry, automate business reporting small business
+2. Performance & Stability
+Commercial: slow report consultant, database performance consultant, ETL consultant, data pipeline consulting, SQL optimization consultant
+Informational: why are my Power BI reports slow, how to fix slow dashboards, database query optimization tips
+3. Training
+Commercial: data literacy training for teams, business data training consultant, reporting tools training
+Informational: how to train employees on data tools, data literacy for non-technical teams
+4. Governance
+Commercial: data governance consultant, data silo consultant, shadow IT data governance
+Informational: what is data governance small business, how to fix data silos
+5. Storytelling
+Commercial: data storytelling consultant, business intelligence consultant, data visualization consulting
+Informational: how to make data tell a story, data visualization best practices
+
+Local Variants (sprinkle these throughout)
+Add "Atlanta," "Atlanta GA," or "Duluth GA" to your top commercial terms — e.g. data automation consultant Atlanta, ETL consultant Atlanta GA.

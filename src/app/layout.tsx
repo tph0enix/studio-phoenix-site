@@ -14,28 +14,35 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteTitle = 'VECTOR | Data & Automation Consulting';
+const siteDescription = 'Remote-first consulting for data automation, ETL pipelines, report performance, and governance. We turn data chaos into systems that actually work, worldwide.';
+const siteUrl = 'https://vector.studiophoenix.ink';
+const siteName = 'VECTOR';
+const siteImage = '/images/branding/og-image.png';
+const siteFavicon = '/images/branding/favicon.svg';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://vector.studiophoenix.ink'), // THE ANCHOR
+  metadataBase: new URL(siteUrl), // THE ANCHOR
   title: {
-    default: 'VECTOR | Reality-Born Systems Architecture',
-    template: '%s | VECTOR'
+    default: siteTitle,
+    template: `%s | ${siteName}`
   },
-  description: 'High-performance data infrastructure, automation, and technical governance by Tristan Phoenix. Restoring authentic beauty & information in the Age of the Digital Facade.',
+  description: siteDescription,
   icons: {
-    icon: '/images/branding/favicon.svg',
-    shortcut: '/images/branding/favicon.svg',
+    icon: siteFavicon,
+    shortcut: siteFavicon,
   },
   openGraph: {
-    title: 'VECTOR | Systems Architecture',
-    description: 'Data infrastructure that ignites performance. Built by Studio Phoenix.',
-    url: 'https://vector.studiophoenix.ink',
-    siteName: 'VECTOR',
+    title: siteTitle,
+    description: siteDescription,
+    url: siteUrl,
+    siteName: siteName,
     images: [
       {
-        url: '/images/branding/og-image.png',
+        url: siteImage,
         width: 1200,
         height: 630,
-        alt: 'VECTOR Systems Architecture',
+        alt: siteTitle,
       },
     ],
     locale: 'en_US',
@@ -43,9 +50,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'VECTOR | Systems Architecture',
-    description: 'Restoring authenticity to data systems.',
-    images: ['/images/branding/og-image.png'],
+    title: siteTitle,
+    description: siteDescription,
+    images: [siteImage],
   },
   robots: {
     index: true,
