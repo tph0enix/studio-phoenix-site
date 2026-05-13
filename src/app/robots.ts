@@ -7,18 +7,6 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: '*',
         allow: '/',
         disallow: ['/api/', '/_next/'],
-      },
-      {
-        userAgent: [
-          'GPTBot',           // OpenAI training only - block
-          'CCBot',            // Common Crawl training - block
-          'Amazonbot',        // Amazon training - block
-          'Bytespider',       // TikTok training - block
-          'meta-externalagent', // Meta training - block
-          // Removed: Google-Extended (blocks AI Overviews)
-          // Removed: Applebot-Extended (blocks Apple search)
-        ],
-        disallow: '/',
       }
     ],
     sitemap: [
