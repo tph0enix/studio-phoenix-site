@@ -1,33 +1,41 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Replace with your actual production domain
-  const baseUrl = 'https://vector.studiophoenix.ink';
-  
-  return [
+  const studioPages = [
     {
-      url: baseUrl,
+      url: 'https://studiophoenix.ink',
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
+      priority: 1,
+    },
+  ]
+
+  const vectorPages = [
+    {
+      url: 'https://vector.studiophoenix.ink',
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
       priority: 1,
     },
     {
-      url: `${baseUrl}/privacy`,
+      url: 'https://vector.studiophoenix.ink/privacy',
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/terms`,
+      url: 'https://vector.studiophoenix.ink/terms',
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/cookies`,
+      url: 'https://vector.studiophoenix.ink/cookies',
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
   ]
+
+  return [...studioPages, ...vectorPages]
 }
